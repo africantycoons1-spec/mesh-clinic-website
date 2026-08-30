@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesh Clinic | Jijiga</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+  <!-- Top Bar -->
+  <div class="bg-slate-900 text-slate-300 text-xs py-2.5 px-4 sm:px-8 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center space-x-6">
+        <span><i class="fa-solid fa-phone-volume text-emerald-400 mr-2 animate-pulse"></i> Emergency: <strong class="text-white ml-1">0915737157</strong></span>
+        <span class="hidden md:flex items-center">
+          <i class="fa-solid fa-location-dot text-emerald-400 mr-2"></i>
+          <a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-slate-300 hover:text-white underline">Jigjiga Map (9Q2X+7V2)</a>
+        </span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span><i class="fa-regular fa-clock text-emerald-400 mr-2"></i> Open 24/7</span>
+        <a href="https://wa.me/251915737157" target="_blank" class="hover:text-emerald-400 flex items-center space-x-1 bg-emerald-600/30 px-2.5 py-1 rounded-md"><i class="fa-brands fa-whatsapp text-emerald-400"></i> <span>WhatsApp</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="index.html" class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-teal-500 flex items-center justify-center text-white font-bold text-xl shadow-md">
+            <i class="fa-solid fa-house-medical"></i>
+          </div>
+          <div>
+            <span class="text-2xl font-extrabold tracking-tight text-slate-900">Mesh <span class="text-blue-600">Clinic</span></span>
+            <span class="block text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Private Medical Center</span>
+          </div>
+        </a>
+      </div>
+      <nav class="hidden lg:flex items-center space-x-6 font-medium text-sm text-slate-600">
+        <a href="index.html" class="text-blue-600 font-semibold">Home</a>
+        <a href="doctors.html" class="hover:text-blue-600 transition">Specialists</a>
+        <a href="medical_services.html" class="hover:text-blue-600 transition">Services</a>
+        <a href="patient_info.html" class="hover:text-blue-600 transition">Patient Info</a>
+        <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
+      </nav>
+      <div class="flex items-center space-x-3">
+        <button onclick="openBookingModal()" class="bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold px-4 py-2.5 rounded-xl shadow-lg hover:scale-105 transition text-sm flex items-center">
+          <i class="fa-regular fa-calendar-check mr-2"></i> Book Appointment
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative text-white py-24 lg:py-32 overflow-hidden bg-slate-900">
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-slate-900/50"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+      <div class="max-w-3xl space-y-6">
+        <div class="inline-flex items-center space-x-2 bg-slate-800/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700 text-xs font-semibold text-emerald-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Jigjiga's Leading Private Healthcare Clinic
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+          MESH Medical And Surgical <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-sky-300">Speciality Clinic</span>
+        </h1>
+        <p class="text-lg text-slate-200 max-w-2xl font-normal leading-relaxed">
+          Your Health Is Our Priority. With experienced specialists, modern diagnostic technology, and patient-centered treatment tailored for your family's well-being at Mesh Clinic in Jijiga.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
+          <button onclick="openBookingModal()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-4 rounded-xl shadow-xl hover:scale-105 transition text-center">
+            <i class="fa-solid fa-calendar-plus mr-2"></i> Book An Appointment
+          </button>
+          <a href="https://wa.me/251915737157" target="_blank" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-7 py-4 rounded-xl shadow-lg transition text-center">
+            <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Welcome -->
+  <section class="py-16 max-w-6xl mx-auto px-4">
+    <div class="bg-white rounded-3xl shadow-lg p-8 md:p-12 border border-slate-100">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8 space-y-4">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-blue-600 tracking-tight">Welcome to Mesh Clinic</h2>
+          <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+            Mesh Clinic is located in the heart of Jijiga (<a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-blue-600 underline font-semibold">9Q2X+7V2, Jijiga Map</a>).
+          </p>
+          <div class="flex items-center space-x-3 bg-rose-50 border border-rose-200 p-4 rounded-2xl text-rose-700 font-extrabold text-sm sm:text-base shadow-md">
+            <i class="fa-solid fa-phone-volume text-rose-600 text-xl animate-pulse"></i>
+            <span>CALL THESE NUMBERS FOR EMERGENCY!</span>
+          </div>
+        </div>
+        <div class="lg:col-span-4 flex flex-col space-y-3">
+          <a href="tel:0915737157" class="bg-blue-50 hover:bg-blue-100 border border-blue-200 p-4 rounded-2xl flex items-center space-x-4 transition">
+            <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center text-lg font-bold shrink-0 shadow">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div>
+              <span class="text-xs text-slate-500 font-medium block">Call Us Now</span>
+              <strong class="text-slate-900 text-sm font-bold font-mono">0915737157</strong>
+            </div>
+          </a>
+          <a href="https://wa.me/251915737157" target="_blank" class="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 p-4 rounded-2xl flex items-center space-x-4 transition">
+            <div class="w-12 h-12 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg font-bold shrink-0 shadow">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div>
+              <span class="text-xs text-slate-500 font-medium block">WhatsApp Support</span>
+              <strong class="text-slate-900 text-sm font-bold font-mono">+251915737157</strong>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div>
+          <span class="text-2xl font-extrabold text-white">Mesh <span class="text-blue-500">Clinic</span></span>
+          <p class="text-sm mt-4 text-slate-400">Private Medical Center located at 9Q2X+7V2, Jijiga. Providing expert care with a personal touch.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html" class="hover:text-white">Home</a></li>
+            <li><a href="doctors.html" class="hover:text-white">Specialists</a></li>
+            <li><a href="medical_services.html" class="hover:text-white">Services</a></li>
+            <li><a href="patient_info.html" class="hover:text-white">Patient Info</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4">Contact Info</h4>
+          <ul class="space-y-2 text-sm">
+            <li>Phone/WhatsApp: <strong class="text-white">0915737157</strong></li>
+            <li>Location: <a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-blue-400 underline">9Q2X+7V2, Jijiga Map</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-slate-900 text-center text-xs text-slate-500">
+        &copy; 2026 Mesh Clinic (Jigjiga). All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Booking Modal -->
+  <div id="booking-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative">
+      <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 class="text-xl font-extrabold text-slate-900 mb-2">Book Your Appointment</h3>
+      <p class="text-xs text-slate-500 mb-6">Secure your consultation at Mesh Clinic, Jijiga.</p>
+      <form onsubmit="handleModalSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Full Name</label>
+          <input type="text" required placeholder="Enter your full name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600">
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Phone Number</label>
+            <input type="tel" required value="0915737157" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Department</label>
+            <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600">
+              <option>General Medicine</option>
+              <option>Diagnostics & Laboratory</option>
+              <option>Pediatrics & Maternal Care</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg hover:opacity-95 transition text-sm">
+          Confirm Appointment Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openBookingModal() {
+      document.getElementById('booking-modal').classList.remove('hidden');
+    }
+    function closeBookingModal() {
+      document.getElementById('booking-modal').classList.add('hidden');
+    }
+    function handleModalSubmit(e) {
+      e.preventDefault();
+      closeBookingModal();
+      alert("Appointment requested! We will call 0915737157 shortly.");
+    }
+  </script>
+
+</body>
+</html>
