@@ -1,204 +1,1397 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mesh Clinic | Jijiga</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesh Clinic | Expert Healthcare With A Personal Touch - Jijiga</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            dark: '#0f172a',
+                            primary: '#0284c7',
+                            secondary: '#0ea5e9',
+                            accent: '#14b8a6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Three.js for 3D Background Particles -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        canvas.webgl {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .chat-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden">
 
-  <!-- Top Bar -->
-  <div class="bg-slate-900 text-slate-300 text-xs py-2.5 px-4 sm:px-8 border-b border-slate-800">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div class="flex items-center space-x-6">
-        <span><i class="fa-solid fa-phone-volume text-emerald-400 mr-2 animate-pulse"></i> Emergency: <strong class="text-white ml-1">0915737157</strong></span>
-        <span class="hidden md:flex items-center">
-          <i class="fa-solid fa-location-dot text-emerald-400 mr-2"></i>
-          <a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-slate-300 hover:text-white underline">Jigjiga Map (9Q2X+7V2)</a>
-        </span>
-      </div>
-      <div class="flex items-center space-x-4">
-        <span><i class="fa-regular fa-clock text-emerald-400 mr-2"></i> Open 24/7</span>
-        <a href="https://wa.me/251915737157" target="_blank" class="hover:text-emerald-400 flex items-center space-x-1 bg-emerald-600/30 px-2.5 py-1 rounded-md"><i class="fa-brands fa-whatsapp text-emerald-400"></i> <span>WhatsApp</span></a>
-      </div>
+    <div class="bg-slate-900 text-slate-300 text-xs py-2.5 px-4 sm:px-8 border-b border-slate-800 relative z-20">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-6">
+                <span class="flex items-center"><i class="fa-solid fa-phone-volume text-emerald-400 mr-2 animate-pulse"></i> <span data-i18n="emergency_label">Emergency</span>: <strong class="text-white ml-1 font-mono tracking-wide">0915737157</strong></span>
+                <span class="hidden md:flex items-center">
+                    <i class="fa-solid fa-location-dot text-medical-primary mr-2"></i> 
+                    <a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-slate-300 hover:text-white underline decoration-medical-primary decoration-2 transition">Jigjiga Map (9Q2X+7V2)</a>
+                </span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="flex items-center"><i class="fa-regular fa-clock text-medical-accent mr-2"></i> <span data-i18n="hours_label">Open 24/7 Emergency & Inpatient</span></span>
+                <div class="flex space-x-3 text-white items-center">
+                    <a href="https://wa.me/251915737157" target="_blank" class="hover:text-emerald-400 transition flex items-center space-x-1 bg-emerald-600/30 px-2.5 py-1 rounded-md text-[11px] font-semibold"><i class="fa-brands fa-whatsapp text-emerald-400 text-sm"></i> <span>WhatsApp</span></a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- Header -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <a href="index.html" class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-teal-500 flex items-center justify-center text-white font-bold text-xl shadow-md">
-            <i class="fa-solid fa-house-medical"></i>
-          </div>
-          <div>
-            <span class="text-2xl font-extrabold tracking-tight text-slate-900">Mesh <span class="text-blue-600">Clinic</span></span>
-            <span class="block text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Private Medical Center</span>
-          </div>
-        </a>
-      </div>
-      <nav class="hidden lg:flex items-center space-x-6 font-medium text-sm text-slate-600">
-        <a href="index.html" class="text-blue-600 font-semibold">Home</a>
-        <a href="doctors.html" class="hover:text-blue-600 transition">Specialists</a>
-        <a href="medical_services.html" class="hover:text-blue-600 transition">Services</a>
-        <a href="patient_info.html" class="hover:text-blue-600 transition">Patient Info</a>
-        <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
-      </nav>
-      <div class="flex items-center space-x-3">
-        <button onclick="openBookingModal()" class="bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold px-4 py-2.5 rounded-xl shadow-lg hover:scale-105 transition text-sm flex items-center">
-          <i class="fa-regular fa-calendar-check mr-2"></i> Book Appointment
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-medical-primary to-medical-accent flex items-center justify-center text-white font-bold text-xl shadow-md">
+                    <i class="fa-solid fa-house-medical"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-extrabold tracking-tight text-slate-900">Mesh <span class="text-medical-primary">Clinic</span></span>
+                    <span class="block text-[10px] uppercase tracking-widest text-slate-500 font-semibold" data-i18n="tagline">Private Medical Center</span>
+                </div>
+            </div>
+            
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center space-x-6 font-medium text-sm text-slate-600">
+                <a href="#home" class="text-medical-primary font-semibold transition hover:text-medical-primary" data-i18n="nav_home">Home</a>
+                <a href="#specialists" class="hover:text-medical-primary transition" data-i18n="nav_doctors">Specialists</a>
+                <a href="#services" class="hover:text-medical-primary transition" data-i18n="nav_services">Services</a>
+                <a href="#gallery" class="hover:text-medical-primary transition" data-i18n="nav_gallery">Gallery</a>
+                <a href="#story" class="hover:text-medical-primary transition" data-i18n="nav_story">Our Story</a>
+                <a href="#contact" class="hover:text-medical-primary transition" data-i18n="nav_contact">Contact</a>
+            </nav>
+
+            <div class="hidden sm:flex items-center space-x-3">
+                <!-- Language Selector Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleLangDropdown()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-3.5 py-2.5 rounded-xl text-sm flex items-center space-x-1.5 transition">
+                        <i class="fa-solid fa-globe text-medical-primary"></i>
+                        <span id="current-lang-label">English</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-slate-400"></i>
+                    </button>
+                    <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-44 bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden z-50">
+                        <button onclick="setLanguage('en')" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center justify-between text-slate-700 font-medium"><span>English</span> <span class="text-xs text-slate-400 font-bold">EN</span></button>
+                        <button onclick="setLanguage('am')" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center justify-between text-slate-700 font-medium"><span>አማርኛ</span> <span class="text-xs text-slate-400 font-bold">AM</span></button>
+                        <button onclick="setLanguage('so')" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 flex items-center justify-between text-slate-700 font-medium"><span>Af-Somali</span> <span class="text-xs text-slate-400 font-bold">SO</span></button>
+                    </div>
+                </div>
+                <button onclick="openBookingModal()" class="bg-gradient-to-r from-medical-primary to-medical-secondary text-white font-semibold px-4 py-2.5 rounded-xl shadow-lg shadow-medical-primary/20 hover:shadow-xl hover:scale-105 transition transform duration-200 text-sm flex items-center">
+                    <i class="fa-regular fa-calendar-check mr-2"></i> <span data-i18n="book_btn">Book Appointment</span>
+                </button>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="lg:hidden flex items-center space-x-2">
+                <button onclick="toggleLangDropdown()" class="bg-slate-100 text-slate-700 px-3 py-2 rounded-xl text-xs font-bold flex items-center space-x-1">
+                    <i class="fa-solid fa-globe text-medical-primary"></i>
+                    <span id="mobile-lang-label">EN</span>
+                </button>
+                <button id="mobile-menu-btn" class="text-slate-700 focus:outline-none text-xl p-2">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_home">Home</a>
+            <a href="#specialists" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_doctors">Specialists</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_services">Services</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_gallery">Gallery</a>
+            <a href="#story" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_story">Our Story</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_contact">Contact</a>
+            
+            <div class="pt-2 flex flex-col space-y-2">
+                <div class="grid grid-cols-3 gap-2 pb-2">
+                    <button onclick="setLanguage('en'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">English</button>
+                    <button onclick="setLanguage('am'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">አማርኛ</button>
+                    <button onclick="setLanguage('so'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">Af-Somali</button>
+                </div>
+                <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full bg-medical-primary text-white font-semibold py-2.5 rounded-xl text-center shadow-md">
+                    <span data-i18n="book_btn">Book Appointment</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="relative text-white py-24 lg:py-36 overflow-hidden min-h-[680px] flex items-center">
+        <!-- Background Slide 1 -->
+        <div class="hero-bg-slide absolute inset-0 transition-opacity duration-1000 opacity-100 z-0">
+            <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnGqHzCo6jcirV8T6G8QQlM_lPrar8N_kANickF7V_nbTUDKh8FZcYfDqC3b1ReG951IT4W8KL5Mj0UXLt79IWEvSm2Qgv6N7Y3s9aV9HjsI0xVJbFETLd6nWh-6kH0RuXh-F3H1d3z0HY=s680-w680-h510-rw" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/0284c7/ffffff?text=Mesh+Clinic+Gate';" alt="Mesh Clinic Gate" class="w-full h-full object-cover">
+        </div>
+        <!-- Background Slide 2 -->
+        <div class="hero-bg-slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
+            <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkrn4OvsprmCo3iAaTQkJ-C4FlwbewDi4UMALiuXLKb16TBh_jGnwxGnQ7clYGh-gvC7k6Wf6aspsZd1-hv1yIkNvFYA33Yu7PMdF7w6CUJfGV9XnEdMXKqNe3mV5yhBq50bEbrpgalpDY=s680-w680-h510-rw" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/0d9488/ffffff?text=Mesh+Clinic+Entrance';" alt="Mesh Clinic Entrance" class="w-full h-full object-cover">
+        </div>
+        <!-- Subtle Dark Text Readability Gradient Overlay (Left side only for text, right side fully clear) -->
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/40 to-transparent z-1"></div>
+        <!-- Three.js Particle Canvas -->
+        <canvas class="webgl" id="hero-canvas"></canvas>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10 w-full">
+            <div class="max-w-3xl space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center space-x-2 bg-slate-900/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700 text-xs font-semibold text-medical-200 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span data-i18n="hero_badge">Jigjiga's Leading Private Healthcare Clinic</span>
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight text-white">
+                    <span data-i18n="hero_title_1">MESH Medical And Surgical</span> <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-sky-300" data-i18n="hero_title_2">Speciality Clinic</span>
+                </h1>
+                <p class="text-lg text-slate-200 max-w-2xl font-normal leading-relaxed drop-shadow" data-i18n="hero_desc">
+                    Your Health Is Our Priority. With experienced specialists, modern diagnostic technology, and patient-centered treatment tailored for your family's well-being at Mesh Clinic in Jijiga.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <button onclick="openBookingModal()" class="w-full sm:w-auto bg-medical-primary hover:bg-medical-secondary text-white font-bold px-7 py-4 rounded-xl shadow-xl hover:scale-105 transition transform duration-200 flex items-center justify-center">
+                        <i class="fa-solid fa-calendar-plus mr-2"></i> <span data-i18n="book_appointment_cta">Book An Appointment</span>
+                    </button>
+                    <a href="https://wa.me/251915737157" target="_blank" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-7 py-4 rounded-xl shadow-lg transition text-center flex items-center justify-center">
+                        <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> <span data-i18n="whatsapp_cta">Chat on WhatsApp</span>
+                    </a>
+                    <button onclick="toggleChat()" class="w-full sm:w-auto bg-slate-800/80 hover:bg-slate-700 border border-slate-600 text-white font-semibold px-7 py-4 rounded-xl shadow-lg transition flex items-center justify-center backdrop-blur-md">
+                        <i class="fa-solid fa-robot text-medical-primary mr-2"></i> <span data-i18n="ai_assistant_btn">AI Assistant</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 max-w-6xl mx-auto px-4">
+        <div class="bg-white rounded-3xl shadow-lg p-8 md:p-12 border border-slate-100 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-8 space-y-4">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-medical-primary tracking-tight" data-i18n="welcome_mesh">Welcome to Mesh Clinic</h2>
+                <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                    Mesh Clinic is located in the heart of Jijiga (<a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-medical-primary underline font-semibold">9Q2X+7V2, Jijiga Map</a>).
+                </p>
+                <div class="flex items-center space-x-3 bg-rose-50 border border-rose-200 p-4 rounded-2xl text-rose-700 font-extrabold text-sm sm:text-base shadow-md">
+                    <i class="fa-solid fa-phone-volume text-rose-600 text-xl animate-pulse"></i>
+                    <span>CALL THESE NUMBERS FOR EMERGENCY!</span>
+                    <div class="ml-auto flex items-center space-x-1 text-medical-primary">
+                        <i class="fa-solid fa-arrow-right text-2xl animate-bounce"></i>
+                        <i class="fa-solid fa-arrow-right text-xl opacity-75 animate-pulse hidden sm:inline-block"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-4 flex flex-col space-y-3">
+                <a href="tel:0915737157" class="bg-medical-50 hover:bg-medical-100 border border-medical-200 p-4 rounded-2xl flex items-center space-x-4 transition">
+                    <div class="w-12 h-12 rounded-xl bg-medical-primary text-white flex items-center justify-center text-lg font-bold shrink-0 shadow">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 font-medium block" data-i18n="call_us_now">Call Us Now</span>
+                        <strong class="text-slate-900 text-sm font-bold font-mono">0915737157</strong>
+                    </div>
+                </a>
+                <a href="https://wa.me/251915737157" target="_blank" class="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 p-4 rounded-2xl flex items-center space-x-4 transition">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg font-bold shrink-0 shadow">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 font-medium block" data-i18n="whatsapp_chat">WhatsApp Support</span>
+                        <strong class="text-slate-900 text-sm font-bold font-mono">+251915737157</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="specialists" class="py-16 max-w-7xl mx-auto px-4 sm:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-8">
+            <div class="space-y-3">
+                <span class="text-medical-primary font-bold uppercase tracking-widest text-xs bg-medical-50 px-3.5 py-1.5 rounded-full" data-i18n="expert_team">Expert Medical Team</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900" data-i18n="specialists_heading">Meet Our Dedicated Specialists</h2>
+                <p class="text-slate-600 max-w-xl text-sm sm:text-base" data-i18n="specialists_sub">Consult with senior physicians and specialists committed to your health and rapid recovery.</p>
+            </div>
+            <button onclick="openBookingModal()" class="mt-4 md:mt-0 text-medical-primary font-bold text-sm flex items-center hover:underline">
+                <span data-i18n="book_consultation">Book Consultation</span> <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+            </button>
+        </div>
+
+        <!-- Filter Buttons for Specialists -->
+        <div class="flex flex-wrap gap-2 mb-8">
+            <button onclick="filterSpecialists('all')" id="filter-all" class="px-4 py-2 rounded-xl text-xs font-bold bg-medical-primary text-white shadow-sm transition">All Specialists</button>
+            <button onclick="filterSpecialists('general')" id="filter-general" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition">General Practice</button>
+            <button onclick="filterSpecialists('internal')" id="filter-internal" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition">Internal Medicine</button>
+            <button onclick="filterSpecialists('pediatrics')" id="filter-pediatrics" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition">Pediatrics</button>
+            <button onclick="filterSpecialists('surgery')" id="filter-surgery" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition">Surgery & Orthopedics</button>
+        </div>
+
+        <div id="specialists-grid" class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+            <!-- Doctor 1 -->
+            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="general">
+                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4w38oUiNLsWGa7jvDRKYSAbmbT122MFWsPC_wqXjoZg&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Ahmed';" alt="Dr. Ahmed Omar" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                    </div>
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="font-bold text-slate-900 text-sm">Dr. Ahmed Omar</h3>
+                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1" data-i18n="doc_spec_1">General Practitioner</p>
+                    <p class="text-[10px] text-slate-500">Primary Care</p>
+                </div>
+            </div>
+            <!-- Doctor 2 -->
+            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="internal">
+                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4-0ai-2w0g0B8JVALQp3K8eFGDCeI83Pru3f2CAZMTQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Fatima';" alt="Dr. Fatima Hassan" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                    </div>
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="font-bold text-slate-900 text-sm">Dr. Fatima Hassan</h3>
+                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1" data-i18n="doc_spec_2">Internal Medicine</p>
+                    <p class="text-[10px] text-slate-500">Chronic Care</p>
+                </div>
+            </div>
+            <!-- Doctor 3 -->
+            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="pediatrics">
+                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaPSQ5HaUEtCaU2iePUcLNAkBoSB0c62Mp4EGkyG_K7w&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Ibrahim';" alt="Dr. Ibrahim Yusuf" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                    </div>
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="font-bold text-slate-900 text-sm">Dr. Ibrahim Yusuf</h3>
+                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1" data-i18n="doc_spec_3">Pediatrics</p>
+                    <p class="text-[10px] text-slate-500">Child Health</p>
+                </div>
+            </div>
+            <!-- Doctor 4 -->
+            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="surgery">
+                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCNWDgE3dHUzy8Ak4ra4YdTV6hK288xK6zInm2I6PwwQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Samira';" alt="Dr. Samira Abdi" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                    </div>
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="font-bold text-slate-900 text-sm">Dr. Samira Abdi</h3>
+                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1" data-i18n="doc_spec_4">Surgery</p>
+                    <p class="text-[10px] text-slate-500">Trauma Care</p>
+                </div>
+            </div>
+            <!-- Doctor 5 -->
+            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="internal">
+                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ27EhKVotCvokwOkU09_tueECsksa98n33XIsGrWEGvA&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Mohamed';" alt="Dr. Mohamed Ali" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                    </div>
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="font-bold text-slate-900 text-sm">Dr. Mohamed Ali</h3>
+                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Cardiology</p>
+                    <p class="text-[10px] text-slate-500">Heart Specialist</p>
+                </div>
+            </div>
+            <!-- Doctor 6 -->
+            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="general">
+                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbDbIC8QI8J-S3mLXorPegjFoyk4InOSyQ0NPL6t1sw&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Aysha';" alt="Dr. Aysha Nur" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                    </div>
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="font-bold text-slate-900 text-sm">Dr. Aysha Nur</h3>
+                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Dermatology</p>
+                    <p class="text-[10px] text-slate-500">Skin Specialist</p>
+                </div>
+            </div>
+            <!-- Doctor 7 -->
+            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="surgery">
+                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRryw-KclIIgZVTMNWLsxIPFwpFMEhpdLSssI14Xnh82w&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Liban';" alt="Dr. Liban Jama" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                    </div>
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="font-bold text-slate-900 text-sm">Dr. Liban Jama</h3>
+                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Ophthalmology</p>
+                    <p class="text-[10px] text-slate-500">Eye Specialist</p>
+                </div>
+            </div>
+            <!-- Doctor 8 -->
+            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="pediatrics">
+                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtTxZZIFE78yll0i3a6q-ZGVgR5SIUeySf9uXaxylFAQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Hodan';" alt="Dr. Hodan Warsame" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                    </div>
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="font-bold text-slate-900 text-sm">Dr. Hodan Warsame</h3>
+                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Gynecology</p>
+                    <p class="text-[10px] text-slate-500">Women's Health</p>
+                </div>
+            </div>
+            <!-- Doctor 9 -->
+            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="internal">
+                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvg4gXYnbfWtU1iw4rGYM0xqxSkUl9r_wxIhiG42wTVA&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Mahad';" alt="Dr. Mahad Farah" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                    </div>
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="font-bold text-slate-900 text-sm">Dr. Mahad Farah</h3>
+                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Neurology</p>
+                    <p class="text-[10px] text-slate-500">Brain & Nerve</p>
+                </div>
+            </div>
+            <!-- Doctor 10 -->
+            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="general">
+                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1chBRuWzJWDdADpxBa9zyLZx-oU5Tt8J2nCW8244_Kg&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Specialist';" alt="Dr. Specialist" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                    </div>
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="font-bold text-slate-900 text-sm">Dr. Mesh Specialist</h3>
+                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Specialist Physician</p>
+                    <p class="text-[10px] text-slate-500">Advanced Treatment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-16 bg-slate-100/60 border-y border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-medical-primary font-bold uppercase tracking-widest text-xs bg-white px-3.5 py-1.5 rounded-full shadow-sm" data-i18n="clinical_services">Clinical Services</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900" data-i18n="services_heading">Our Departments</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group">
+                    <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="serv_1_title">General Medicine & Consultations</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed" data-i18n="serv_1_desc">Primary health evaluations, chronic illness management, routine wellness checks, and preventive care.</p>
+                    <button onclick="openServiceModal('General Medicine')" class="text-medical-primary font-semibold text-sm flex items-center hover:underline">
+                        <span data-i18n="learn_more">Learn More</span> <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
+                    </button>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group">
+                    <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
+                        <i class="fa-solid fa-microscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="serv_2_title">Diagnostics & Laboratory</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed" data-i18n="serv_2_desc">High-precision digital lab testing, blood analysis, ultrasound diagnostics, and rapid screening.</p>
+                    <button onclick="openServiceModal('Diagnostics')" class="text-medical-primary font-semibold text-sm flex items-center hover:underline">
+                        <span data-i18n="learn_more">Learn More</span> <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
+                    </button>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group">
+                    <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
+                        <i class="fa-solid fa-child-reaching"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="serv_3_title">Pediatrics & Maternal Care</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed" data-i18n="serv_3_desc">Dedicated infant care, vaccination programs, prenatal support, and family health guidance.</p>
+                    <button onclick="openServiceModal('Pediatrics')" class="text-medical-primary font-semibold text-sm flex items-center hover:underline">
+                        <span data-i18n="learn_more">Learn More</span> <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
+                    </button>
+                </div>
+                <!-- Service 4 (Pharmacy) -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group">
+                    <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
+                        <i class="fa-solid fa-pills"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Pharmacy Services</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Fully stocked dispensary providing prescription medications, vaccines, and pharmaceutical consultations 24/7.</p>
+                    <button onclick="openServiceModal('Pharmacy Services')" class="text-medical-primary font-semibold text-sm flex items-center hover:underline">
+                        <span data-i18n="learn_more">Learn More</span> <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
+                    </button>
+                </div>
+                <!-- Service 5 (ICU) -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group">
+                    <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
+                        <i class="fa-solid fa-bed-pulse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">ICU Services</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Advanced Intensive Care Unit equipped with life-support monitors, ventilators, and specialized critical care nurses.</p>
+                    <button onclick="openServiceModal('ICU Services')" class="text-medical-primary font-semibold text-sm flex items-center hover:underline">
+                        <span data-i18n="learn_more">Learn More</span> <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
+                    </button>
+                </div>
+                <!-- Service 6 (Emergency) -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group">
+                    <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
+                        <i class="fa-solid fa-truck-medical"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Emergency Care Services</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">24/7 emergency response unit, trauma care, rapid triage, and ambulance dispatch for urgent medical attention.</p>
+                    <button onclick="openServiceModal('Emergency Care Services')" class="text-medical-primary font-semibold text-sm flex items-center hover:underline">
+                        <span data-i18n="learn_more">Learn More</span> <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Medical Image Gallery Section (Replacing BMI Calculator) -->
+    <section id="gallery" class="py-16 max-w-7xl mx-auto px-4 sm:px-8">
+        <div class="bg-gradient-to-br from-slate-900 to-medical-dark text-white rounded-3xl p-8 sm:p-12 shadow-xl space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="text-medical-accent font-bold uppercase tracking-widest text-xs bg-medical-900/60 px-3.5 py-1.5 rounded-full border border-medical-500/30">Facility Showcase</span>
+                <h2 class="text-3xl font-extrabold tracking-tight">Mesh Clinic Visual Tour</h2>
+                <p class="text-slate-300 text-sm">Explore our modern medical environment, advanced equipment, and specialized care rooms in Jijiga.</p>
+            </div>
+            <!-- Responsive Grid: 2 columns on mobile, 3 columns on desktop with a clean balanced layout -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                <div class="overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[4/3] bg-slate-800 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa-vGGEDAEotehSX7U1TerC1-BICch3fkDB9RW_z7iHw&s=10" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0284c7/ffffff?text=Mesh+Clinic+1';" alt="Mesh Clinic Facility 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[4/3] bg-slate-800 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTNHNBgib9_eysWDGRusauDiDYHRJXcFzBujf4K8l4dQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0d9488/ffffff?text=Mesh+Clinic+2';" alt="Mesh Clinic Facility 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[4/3] bg-slate-800 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFVZ7ZaYyjihDffZT_bQyPmnONBydvVTZx4LuxEbI08A&s=10" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0284c7/ffffff?text=Mesh+Clinic+3';" alt="Mesh Clinic Facility 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[4/3] bg-slate-800 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFP4AAMYrakteEXlKdCBZLEl6Y3FMwCLsg6GeG4xqM0Q&s=10" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0d9488/ffffff?text=Mesh+Clinic+4';" alt="Mesh Clinic Facility 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[4/3] bg-slate-800 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3J4rzbevXXMEgqhYBiOe_kyQiymd9IuHVqAzlZ-qpxQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0284c7/ffffff?text=Mesh+Clinic+5';" alt="Mesh Clinic Facility 5" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[4/3] bg-slate-800 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3izETIwbHzcPlmtjYNQiu4glPg39xFRK0jYYpY-H_uQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0d9488/ffffff?text=Mesh+Clinic+6';" alt="Mesh Clinic Facility 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="col-span-2 md:col-span-3 overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[16/6] bg-slate-800 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThHgKtvmpCvxsYa3eRQ6Chfgn0Fj4cW43o8dvNihE4gQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/1200x450/0284c7/ffffff?text=Mesh+Clinic+Panorama';" alt="Mesh Clinic Facility 7" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expanded Patient Trust / Testimonial Video Section (6 Videos Grid) -->
+    <section class="py-16 max-w-7xl mx-auto px-4 sm:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <span class="text-medical-primary font-bold uppercase tracking-widest text-xs bg-medical-50 px-3.5 py-1.5 rounded-full" data-i18n="patient_trust">Patient Trust</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900" data-i18n="testimonials_heading">What Our Patients Say</h2>
+            <p class="text-slate-600 text-sm sm:text-base" data-i18n="testimonials_sub">Real feedback from patients who received exceptional care at Mesh Clinic.</p>
+        </div>
+
+        <!-- 6 Testimonial Video Placeholders Grid (3 columns on desktop, 2 on tablet, 1 on mobile) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Video Card 1 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group">
+                <div class="relative overflow-hidden aspect-video bg-slate-900">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+1';" alt="Patient Testimonial 1 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
+                        <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
+                            <i class="fa-solid fa-play ml-0.5"></i>
+                        </button>
+                    </div>
+                    <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
+                        Patient Testimonial
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 1</h3>
+                    <p class="text-slate-600 text-sm italic leading-relaxed">
+                        "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
+                    </p>
+                    <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
+                        <div class="w-8 h-8 rounded-full bg-medical-100 text-medical-primary font-bold text-xs flex items-center justify-center">P1</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
+                            <p class="text-[10px] text-slate-500">Jigjiga</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card 2 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group">
+                <div class="relative overflow-hidden aspect-video bg-slate-900">
+                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+2';" alt="Patient Testimonial 2 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
+                        <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
+                            <i class="fa-solid fa-play ml-0.5"></i>
+                        </button>
+                    </div>
+                    <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
+                        Patient Testimonial
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 2</h3>
+                    <p class="text-slate-600 text-sm italic leading-relaxed">
+                        "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
+                    </p>
+                    <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
+                        <div class="w-8 h-8 rounded-full bg-teal-100 text-teal-700 font-bold text-xs flex items-center justify-center">P2</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
+                            <p class="text-[10px] text-slate-500">Jigjiga</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card 3 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group">
+                <div class="relative overflow-hidden aspect-video bg-slate-900">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+3';" alt="Patient Testimonial 3 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
+                        <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
+                            <i class="fa-solid fa-play ml-0.5"></i>
+                        </button>
+                    </div>
+                    <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
+                        Patient Testimonial
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 3</h3>
+                    <p class="text-slate-600 text-sm italic leading-relaxed">
+                        "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
+                    </p>
+                    <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
+                        <div class="w-8 h-8 rounded-full bg-sky-100 text-sky-700 font-bold text-xs flex items-center justify-center">P3</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
+                            <p class="text-[10px] text-slate-500">Jigjiga</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card 4 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group">
+                <div class="relative overflow-hidden aspect-video bg-slate-900">
+                    <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+4';" alt="Patient Testimonial 4 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
+                        <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
+                            <i class="fa-solid fa-play ml-0.5"></i>
+                        </button>
+                    </div>
+                    <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
+                        Patient Testimonial
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 4</h3>
+                    <p class="text-slate-600 text-sm italic leading-relaxed">
+                        "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
+                    </p>
+                    <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
+                        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs flex items-center justify-center">P4</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
+                            <p class="text-[10px] text-slate-500">Jigjiga</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card 5 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group">
+                <div class="relative overflow-hidden aspect-video bg-slate-900">
+                    <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+5';" alt="Patient Testimonial 5 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
+                        <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
+                            <i class="fa-solid fa-play ml-0.5"></i>
+                        </button>
+                    </div>
+                    <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
+                        Patient Testimonial
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 5</h3>
+                    <p class="text-slate-600 text-sm italic leading-relaxed">
+                        "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
+                    </p>
+                    <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
+                        <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 font-bold text-xs flex items-center justify-center">P5</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
+                            <p class="text-[10px] text-slate-500">Jigjiga</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card 6 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group">
+                <div class="relative overflow-hidden aspect-video bg-slate-900">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+6';" alt="Patient Testimonial 6 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
+                        <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
+                            <i class="fa-solid fa-play ml-0.5"></i>
+                        </button>
+                    </div>
+                    <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
+                        Patient Testimonial
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 6</h3>
+                    <p class="text-slate-600 text-sm italic leading-relaxed">
+                        "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
+                    </p>
+                    <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
+                        <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-bold text-xs flex items-center justify-center">P6</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
+                            <p class="text-[10px] text-slate-500">Jigjiga</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="story" class="py-16 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-6 space-y-6">
+                <span class="text-medical-accent font-bold uppercase tracking-widest text-xs bg-medical-900/50 px-3.5 py-1.5 rounded-full border border-medical-500/30" data-i18n="our_story_badge">Our Story</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight" data-i18n="story_heading">Building Trust & Quality Healthcare in Jijiga</h2>
+                <p class="text-slate-300 font-light leading-relaxed text-sm sm:text-base" data-i18n="story_desc">
+                    At Mesh Clinic, our journey began with a simple vision: to provide accessible, high-standard private medical care with genuine human compassion. Watch our story to learn more about our commitment to the community.
+                </p>
+                <div class="flex items-center space-x-4 pt-2">
+                    <button onclick="openBookingModal()" class="bg-medical-primary hover:bg-medical-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition text-sm">
+                        <span data-i18n="book_now">Book Appointment</span>
+                    </button>
+                    <a href="https://wa.me/251915737157" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition text-sm flex items-center">
+                        <i class="fa-brands fa-whatsapp mr-2"></i> <span data-i18n="whatsapp_us">WhatsApp Us</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Video Placeholder Area -->
+            <div class="lg:col-span-6">
+                <div class="relative aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl border border-slate-700 bg-slate-800 flex items-center justify-center group">
+                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800" onerror="this.onerror=null;this.src='https://placehold.co/800x450/0f172a/ffffff?text=Mesh+Clinic+Facility+Overview';" alt="Mesh Clinic Video Placeholder" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-slate-900/40 flex items-center justify-center">
+                        <button onclick="playVideoPlaceholder()" class="w-20 h-20 rounded-full bg-medical-primary text-white flex items-center justify-center text-2xl shadow-2xl hover:scale-110 transition transform duration-200">
+                            <i class="fa-solid fa-play ml-1"></i>
+                        </button>
+                    </div>
+                    <div class="absolute bottom-4 left-4 right-4 bg-slate-900/80 backdrop-blur-md p-3 rounded-xl text-xs text-slate-300 flex justify-between items-center">
+                        <span data-i18n="video_caption">Mesh Clinic Introduction & Facility Overview</span>
+                        <span class="text-medical-accent font-bold">2:45 min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            <!-- Brand Column -->
+            <div class="space-y-6 lg:col-span-1">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-medical-primary to-medical-accent flex items-center justify-center text-white font-bold text-xl shadow-md">
+                        <i class="fa-solid fa-house-medical"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-extrabold tracking-tight text-white">Mesh <span class="text-medical-primary">Clinic</span></span>
+                        <span class="block text-[10px] uppercase tracking-widest text-slate-400 font-semibold" data-i18n="tagline">Private Medical Center</span>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer_desc">
+                    Mesh Clinic provides dedicated healthcare services with expert physicians, advanced diagnostic support, and compassionate patient care in Jijiga.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="https://wa.me/251915737157" target="_blank" class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center hover:bg-emerald-700 transition" title="WhatsApp"><i class="fa-brands fa-whatsapp text-lg"></i></a>
+                    <a href="tel:0915737157" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-medical-primary text-white flex items-center justify-center transition" title="Call Us"><i class="fa-solid fa-phone"></i></a>
+                </div>
+            </div>
+            <!-- Quick Links -->
+            <div class="space-y-4">
+                <h4 class="text-white font-bold text-base" data-i18n="footer_quick_links">Quick Links</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="#home" class="hover:text-white transition" data-i18n="nav_home">Home Page</a></li>
+                    <li><a href="#specialists" class="hover:text-white transition" data-i18n="nav_doctors">Specialists Directory</a></li>
+                    <li><a href="#services" class="hover:text-white transition" data-i18n="nav_services">Clinical Services</a></li>
+                    <li><a href="#gallery" class="hover:text-white transition" data-i18n="nav_gallery">Gallery</a></li>
+                    <li><a href="#story" class="hover:text-white transition" data-i18n="nav_story">Our Story</a></li>
+                </ul>
+            </div>
+            <!-- Departments -->
+            <div class="space-y-4">
+                <h4 class="text-white font-bold text-base" data-i18n="footer_departments">Departments</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="#services" class="hover:text-white transition">General Medicine</a></li>
+                    <li><a href="#services" class="hover:text-white transition">Diagnostics & Laboratory</a></li>
+                    <li><a href="#services" class="hover:text-white transition">Pediatrics & Maternal Care</a></li>
+                    <li><a href="#services" class="hover:text-white transition">Pharmacy & ICU</a></li>
+                </ul>
+            </div>
+            <!-- Contact Info -->
+            <div class="space-y-4">
+                <h4 class="text-white font-bold text-base" data-i18n="footer_contact">Contact Us</h4>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-location-dot text-medical-primary mt-1"></i>
+                        <span><a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="hover:underline text-slate-300">Jigjiga Map Location (9Q2X+7V2)</a></span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <i class="fa-solid fa-phone text-medical-primary"></i>
+                        <span class="font-mono">0915737157</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <i class="fa-brands fa-whatsapp text-emerald-500"></i>
+                        <a href="https://wa.me/251915737157" target="_blank" class="hover:underline text-emerald-400 font-medium font-mono">+251915737157</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-8 border-t border-slate-900 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p>&copy; 2026 Mesh Clinic (Jigjiga). All rights reserved.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-white transition" data-i18n="privacy_policy">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition" data-i18n="terms_service">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleChat()" class="w-14 h-14 rounded-full bg-gradient-to-tr from-medical-primary to-medical-secondary text-white shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition transform duration-200 focus:outline-none">
+            <i class="fa-solid fa-robot"></i>
         </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="relative text-white py-24 lg:py-32 overflow-hidden bg-slate-900">
-    <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-slate-900/50"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
-      <div class="max-w-3xl space-y-6">
-        <div class="inline-flex items-center space-x-2 bg-slate-800/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700 text-xs font-semibold text-emerald-300">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Jigjiga's Leading Private Healthcare Clinic
-        </div>
-        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
-          MESH Medical And Surgical <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-sky-300">Speciality Clinic</span>
-        </h1>
-        <p class="text-lg text-slate-200 max-w-2xl font-normal leading-relaxed">
-          Your Health Is Our Priority. With experienced specialists, modern diagnostic technology, and patient-centered treatment tailored for your family's well-being at Mesh Clinic in Jijiga.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
-          <button onclick="openBookingModal()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-4 rounded-xl shadow-xl hover:scale-105 transition text-center">
-            <i class="fa-solid fa-calendar-plus mr-2"></i> Book An Appointment
-          </button>
-          <a href="https://wa.me/251915737157" target="_blank" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-7 py-4 rounded-xl shadow-lg transition text-center">
-            <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Chat on WhatsApp
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Welcome -->
-  <section class="py-16 max-w-6xl mx-auto px-4">
-    <div class="bg-white rounded-3xl shadow-lg p-8 md:p-12 border border-slate-100">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-8 space-y-4">
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-blue-600 tracking-tight">Welcome to Mesh Clinic</h2>
-          <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
-            Mesh Clinic is located in the heart of Jijiga (<a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-blue-600 underline font-semibold">9Q2X+7V2, Jijiga Map</a>).
-          </p>
-          <div class="flex items-center space-x-3 bg-rose-50 border border-rose-200 p-4 rounded-2xl text-rose-700 font-extrabold text-sm sm:text-base shadow-md">
-            <i class="fa-solid fa-phone-volume text-rose-600 text-xl animate-pulse"></i>
-            <span>CALL THESE NUMBERS FOR EMERGENCY!</span>
-          </div>
-        </div>
-        <div class="lg:col-span-4 flex flex-col space-y-3">
-          <a href="tel:0915737157" class="bg-blue-50 hover:bg-blue-100 border border-blue-200 p-4 rounded-2xl flex items-center space-x-4 transition">
-            <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center text-lg font-bold shrink-0 shadow">
-              <i class="fa-solid fa-phone"></i>
+        <!-- Chat Window -->
+        <div id="ai-chat-window" class="hidden absolute bottom-20 right-0 w-80 sm:w-96 bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col h-[500px] animate-fade-in">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-slate-900 to-medical-dark text-white p-4 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-medical-500/20 border border-medical-500/40 flex items-center justify-center text-medical-400">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm">Mesh AI Assistant</h4>
+                        <span class="text-[10px] text-emerald-400 font-medium flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span> Online 24/7</span>
+                    </div>
+                </div>
+                <button onclick="toggleChat()" class="text-slate-400 hover:text-white p-2">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
             </div>
-            <div>
-              <span class="text-xs text-slate-500 font-medium block">Call Us Now</span>
-              <strong class="text-slate-900 text-sm font-bold font-mono">0915737157</strong>
+            <!-- Messages Container -->
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 chat-scroll bg-slate-50 text-sm">
+                <div class="flex items-start space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-medical-primary text-white flex items-center justify-center text-xs font-bold shrink-0">AI</div>
+                    <div class="bg-white border border-slate-200 p-3 rounded-2xl rounded-tl-sm text-slate-700 shadow-sm max-w-[85%]">
+                        Welcome to Mesh Clinic in Jijiga! How can I assist you with appointments, doctors, or our medical services today?
+                    </div>
+                </div>
             </div>
-          </a>
-          <a href="https://wa.me/251915737157" target="_blank" class="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 p-4 rounded-2xl flex items-center space-x-4 transition">
-            <div class="w-12 h-12 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg font-bold shrink-0 shadow">
-              <i class="fa-brands fa-whatsapp"></i>
+            <!-- Quick prompt pills -->
+            <div class="px-3 py-2 bg-slate-100 flex gap-1.5 overflow-x-auto text-[11px]">
+                <button onclick="sendQuickPrompt('What are your working hours?')" class="bg-white border border-slate-200 px-2.5 py-1 rounded-full whitespace-nowrap text-slate-700 hover:bg-slate-50">Hours</button>
+                <button onclick="sendQuickPrompt('How do I book an appointment?')" class="bg-white border border-slate-200 px-2.5 py-1 rounded-full whitespace-nowrap text-slate-700 hover:bg-slate-50">Booking</button>
+                <button onclick="sendQuickPrompt('Where is Mesh Clinic located?')" class="bg-white border border-slate-200 px-2.5 py-1 rounded-full whitespace-nowrap text-slate-700 hover:bg-slate-50">Location</button>
             </div>
-            <div>
-              <span class="text-xs text-slate-500 font-medium block">WhatsApp Support</span>
-              <strong class="text-slate-900 text-sm font-bold font-mono">+251915737157</strong>
+            <!-- Input Form -->
+            <div class="p-3 bg-white border-t border-slate-200 flex items-center space-x-2">
+                <input type="text" id="chat-input" placeholder="Type your question..." onkeypress="handleChatKey(event)" class="flex-1 bg-slate-100 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-medical-primary">
+                <button onclick="sendChatMessage()" class="w-10 h-10 rounded-xl bg-medical-primary text-white flex items-center justify-center hover:bg-medical-600 transition shadow">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
             </div>
-          </a>
         </div>
-      </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer id="contact" class="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-        <div>
-          <span class="text-2xl font-extrabold text-white">Mesh <span class="text-blue-500">Clinic</span></span>
-          <p class="text-sm mt-4 text-slate-400">Private Medical Center located at 9Q2X+7V2, Jijiga. Providing expert care with a personal touch.</p>
+    <div id="booking-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative animate-fade-in">
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-xl">
+                    <i class="fa-regular fa-calendar-check"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-extrabold text-slate-900" data-i18n="book_modal_title">Book Your Appointment</h3>
+                    <p class="text-xs text-slate-500" data-i18n="book_modal_sub">Fill in your details to secure a consultation at Mesh Clinic.</p>
+                </div>
+            </div>
+            <form onsubmit="handleModalSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="label_fullname">Full Name</label>
+                    <input type="text" id="modal-name" required placeholder="Enter your full name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-medical-primary">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="label_phone">Phone Number</label>
+                        <input type="tel" id="modal-phone" required value="0915737157" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium font-mono focus:outline-none focus:border-medical-primary">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="label_dept">Department</label>
+                        <select id="modal-dept" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-medical-primary">
+                            <option>General Medicine</option>
+                            <option>Diagnostics & Laboratory</option>
+                            <option>Pediatrics & Maternal Care</option>
+                            <option>Pharmacy Services</option>
+                            <option>ICU Services</option>
+                            <option>Emergency Care Services</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="label_date">Preferred Date</label>
+                        <input type="date" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-medical-primary">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" data-i18n="label_time">Preferred Time</label>
+                        <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-medical-primary">
+                            <option>Morning (08:00 AM - 12:00 PM)</option>
+                            <option>Afternoon (02:00 PM - 06:00 PM)</option>
+                            <option>Evening / Urgent (06:00 PM - 10:00 PM)</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-medical-primary to-medical-secondary text-white font-bold py-4 rounded-xl shadow-lg shadow-medical-primary/20 hover:opacity-95 transition text-sm">
+                    <span data-i18n="confirm_booking_btn">Confirm Appointment Request</span>
+                </button>
+            </form>
         </div>
-        <div>
-          <h4 class="text-white font-bold mb-4">Quick Links</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="index.html" class="hover:text-white">Home</a></li>
-            <li><a href="doctors.html" class="hover:text-white">Specialists</a></li>
-            <li><a href="medical_services.html" class="hover:text-white">Services</a></li>
-            <li><a href="patient_info.html" class="hover:text-white">Patient Info</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-white font-bold mb-4">Contact Info</h4>
-          <ul class="space-y-2 text-sm">
-            <li>Phone/WhatsApp: <strong class="text-white">0915737157</strong></li>
-            <li>Location: <a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-blue-400 underline">9Q2X+7V2, Jijiga Map</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="pt-8 border-t border-slate-900 text-center text-xs text-slate-500">
-        &copy; 2026 Mesh Clinic (Jigjiga). All rights reserved.
-      </div>
     </div>
-  </footer>
 
-  <!-- Booking Modal -->
-  <div id="booking-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative">
-      <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 text-xl">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <h3 class="text-xl font-extrabold text-slate-900 mb-2">Book Your Appointment</h3>
-      <p class="text-xs text-slate-500 mb-6">Secure your consultation at Mesh Clinic, Jijiga.</p>
-      <form onsubmit="handleModalSubmit(event)" class="space-y-4">
+    <div id="toast-notification" class="fixed bottom-6 left-6 z-50 hidden bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-2xl border border-slate-700 flex items-center space-x-3 animate-fade-in">
+        <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold">
+            <i class="fa-solid fa-check"></i>
+        </div>
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Full Name</label>
-          <input type="text" required placeholder="Enter your full name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600">
+            <h4 class="font-bold text-sm" data-i18n="toast_title">Appointment Requested!</h4>
+            <p class="text-xs text-slate-300" data-i18n="toast_sub">We will call 0915737157 shortly to confirm.</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Phone Number</label>
-            <input type="tel" required value="0915737157" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600">
-          </div>
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Department</label>
-            <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600">
-              <option>General Medicine</option>
-              <option>Diagnostics & Laboratory</option>
-              <option>Pediatrics & Maternal Care</option>
-            </select>
-          </div>
-        </div>
-        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg hover:opacity-95 transition text-sm">
-          Confirm Appointment Request
-        </button>
-      </form>
     </div>
-  </div>
 
-  <script>
-    function openBookingModal() {
-      document.getElementById('booking-modal').classList.remove('hidden');
-    }
-    function closeBookingModal() {
-      document.getElementById('booking-modal').classList.add('hidden');
-    }
-    function handleModalSubmit(e) {
-      e.preventDefault();
-      closeBookingModal();
-      alert("Appointment requested! We will call 0915737157 shortly.");
-    }
-  </script>
+    <script>
+        // Multilingual Dictionaries (English, Amharic, Af-Somali)
+        const translations = {
+            en: {
+                emergency_label: "Emergency",
+                hours_label: "Open 24/7 Emergency & Inpatient",
+                tagline: "Private Medical Center",
+                nav_home: "Home",
+                nav_doctors: "Specialists",
+                nav_services: "Services",
+                nav_gallery: "Gallery",
+                nav_story: "Our Story",
+                nav_contact: "Contact",
+                ai_assistant_btn: "AI Assistant",
+                book_btn: "Book Appointment",
+                hero_badge: "Jigjiga's Leading Private Healthcare Clinic",
+                hero_title_1: "MESH Medical And Surgical",
+                hero_title_2: "Speciality Clinic",
+                hero_desc: "Your Health Is Our Priority. With experienced specialists, modern diagnostic technology, and patient-centered treatment tailored for your family's well-being at Mesh Clinic in Jijiga.",
+                book_appointment_cta: "Book An Appointment",
+                whatsapp_cta: "Chat on WhatsApp",
+                welcome_mesh: "Welcome to Mesh Clinic",
+                intro_heading: "Dedicated to Your Family's Health & Complete Well-being",
+                intro_text: "Mesh Clinic is located in the heart of Jijiga. We bring together experienced medical practitioners, advanced diagnostic equipment, and compassionate patient care under one roof. Whether you require a routine consultation or specialized treatment, our team is ready to serve you.",
+                call_us_now: "Call Us Now",
+                whatsapp_chat: "WhatsApp Support",
+                expert_team: "Expert Medical Team",
+                specialists_heading: "Meet Our Dedicated Specialists",
+                specialists_sub: "Consult with senior physicians and specialists committed to your health and rapid recovery.",
+                book_consultation: "Book Consultation",
+                book_appointment_card: "Book Appointment",
+                doc_spec_1: "General Practitioner",
+                doc_exp_1: "Experienced Medical Doctor • Primary Care",
+                doc_spec_2: "Internal Medicine Specialist",
+                doc_exp_2: "Clinical Diagnosis & Chronic Care",
+                doc_spec_3: "Pediatrics & Family Care",
+                doc_exp_3: "Child Health & Immunization",
+                doc_spec_4: "Surgery & Orthopedics",
+                doc_exp_4: "Surgical Specialist & Trauma Care",
+                clinical_services: "Clinical Services",
+                services_heading: "Our Departments",
+                serv_1_title: "General Medicine & Consultations",
+                serv_1_desc: "Primary health evaluations, chronic illness management, routine wellness checks, and preventive care.",
+                serv_2_title: "Diagnostics & Laboratory",
+                serv_2_desc: "High-precision digital lab testing, blood analysis, ultrasound diagnostics, and rapid screening.",
+                serv_3_title: "Pediatrics & Maternal Care",
+                serv_3_desc: "Dedicated infant care, vaccination programs, prenatal support, and family health guidance.",
+                learn_more: "Learn More",
+                patient_trust: "Patient Trust",
+                testimonials_heading: "What Our Patients Say",
+                testimonials_sub: "Real feedback from patients who received exceptional care at Mesh Clinic.",
+                test_1: "\"Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic.\"",
+                jigjiga_resident: "Degganaha Jigjiga",
+                test_2: "\"Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic.\"",
+                local_patient: "Local Patient",
+                test_3: "\"Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic.\"",
+                community_member: "Community Member",
+                our_story_badge: "Our Story",
+                story_heading: "Building Trust & Quality Healthcare in Jijiga",
+                story_desc: "At Mesh Clinic, our journey began with a simple vision: to provide accessible, high-standard private medical care with genuine human compassion. Watch our story to learn more about our commitment to the community.",
+                book_now: "Book Appointment",
+                whatsapp_us: "WhatsApp Us",
+                video_caption: "Mesh Clinic Introduction & Facility Overview",
+                footer_desc: "Mesh Clinic provides dedicated healthcare services with expert physicians, advanced diagnostic support, and compassionate patient care in Jijiga.",
+                footer_quick_links: "Quick Links",
+                footer_departments: "Departments",
+                footer_contact: "Contact Us",
+                privacy_policy: "Privacy Policy",
+                terms_service: "Terms of Service",
+                book_modal_title: "Book Your Appointment",
+                book_modal_sub: "Fill in your details to secure a consultation at Mesh Clinic.",
+                label_fullname: "Full Name",
+                label_phone: "Phone Number",
+                label_dept: "Department",
+                label_date: "Preferred Date",
+                label_time: "Preferred Time",
+                confirm_booking_btn: "Confirm Appointment Request",
+                toast_title: "Appointment Requested!",
+                toast_sub: "We will call 0915737157 shortly to confirm."
+            },
+            am: {
+                emergency_label: "ድንገተኛ አደጋ",
+                hours_label: "24/7 የድንገተኛ እና ህሙማን ማቆያ ክፍት ነው",
+                tagline: "ግል የህክምና ማዕከል",
+                nav_home: "መነሻ",
+                nav_doctors: "ባለሙያዎች",
+                nav_services: "አገልግሎቶች",
+                nav_gallery: "ፎቶዎች",
+                nav_story: "ታሪካችን",
+                nav_contact: "አግኙን",
+                ai_assistant_btn: "የAI ረዳት",
+                book_btn: "ቀጠሮ ይያዙ",
+                hero_badge: "የጅጅጋ መሪ የግል ህክምና ክሊኒክ",
+                hero_title_1: "መሽ ልዩ የዉስጥ ደዌ",
+                hero_title_2: "እና ቀዶ ጥገና ማእከል",
+                hero_desc: "የእርስዎ ጤና ቅድሚያችን ነው!  መሽ ልዩ የዉስጥ ደዌ እና ቀዶ ጥገና ማእከል ",
+                book_appointment_cta: "ቀጠሮ ይያዙ",
+                whatsapp_cta: "በዋትስአፕ ያነጋገሩን",
+                welcome_mesh: "ወደ መሽ ክሊኒክ እንኳን በደህና መጡ",
+                intro_heading: "ለቤተሰብዎ ጤና እና ደህንነት የቆመ",
+                intro_text: "ሜሽ ክሊኒክ በጅጅጋ ከተማ ማዕከል ይገኛል። ልምድ ያላቸው ሃኪሞች እና ዘመናዊ የላብራቶሪ መሣሪያዎች በአንድ ላይ ተሟልተዋል።",
+                call_us_now: "አሁን ይደውሉልን",
+                whatsapp_chat: "የዋትስአፕ ድጋፍ",
+                expert_team: "የህክምና ባለሙያዎች",
+                specialists_heading: "የእኛ ልዩ ባለሙያተኞች",
+                specialists_sub: "ለጤናዎ እና ፈጣን ማገገምዎ ቁርጠኛ ከሆኑ ሃኪሞች ጋር ያማክሩ።",
+                book_consultation: "ምክክር መርሐግብር",
+                book_appointment_card: "ቀጠሮ ይያዙ",
+                doc_spec_1: "አጠቃላይ ሃኪም",
+                doc_exp_1: "ልምድ ያለው የህክምና ዶክተር",
+                doc_spec_2: "የውስጥ ደዌ ባለሙያ",
+                doc_exp_2: "የክሊኒካል ምርመራ እና ክትትል",
+                doc_spec_3: "የህፃናት እና ቤተሰብ ጤና",
+                doc_exp_3: "የህፃናት ጤና እና ክትባት",
+                doc_spec_4: "ቀዶ ጥገና ባለሙያ",
+                doc_exp_4: "የቀዶ ጥገና እና የአደጋ ጊዜ እንክብካቤ",
+                clinical_services: "ክሊኒካዊ አገልግሎቶች",
+                services_heading: "የእኛ ክፍሎች",
+                serv_1_title: "አጠቃላይ ሕክምና እና ምክክር",
+                serv_1_desc: "የመጀመሪያ ደረጃ የጤና ምርመራዎች እና የሥር የሰደዱ በሽታዎች ክትትል።",
+                serv_2_title: "ምርመራ እና ላብራቶሪ",
+                serv_2_desc: "ከፍተኛ ጥራት ያለው የዲጂታል ላብራቶሪ ምርመራ እና የደም ምርመራ።",
+                serv_3_title: "የህፃናት እና እናቶች ጤና",
+                serv_3_desc: "ልዩ የህፃናት እንክብካቤ፣ ክትባት እና የእርግዝና ክትትል ድጋፍ።",
+                learn_more: "ተጨማሪ ይወቁ",
+                patient_trust: "የታካሚዎች እምነት",
+                testimonials_heading: "ታካሚዎቻችን ምን ይላሉ?",
+                testimonials_sub: "በሜሽ ክሊኒክ ጥራት ያለው ሕክምና ካገኙ ታካሚዎች የተሰጡ አስተያየቶች።",
+                test_1: "\"Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic.\"",
+                jigjiga_resident: "የጅጅጋ ነዋሪ",
+                test_2: "\"Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic.\"",
+                local_patient: "የአካባቢ ታካሚ",
+                test_3: "\"Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic.\"",
+                community_member: "የማህበረሰብ አባል",
+                our_story_badge: "ታሪካችን",
+                story_heading: "በጅጅጋ ጥራት ያለው የህክምና አገልግሎት መስጠት",
+                story_desc: "በሜሽ ክሊኒክ ጉዟችን የጀመረው ተደራሽ እና ከፍተኛ ደረጃ ያለው የግል ህክምና በሰብአዊነት ስሜት ለመስጠት ነው።",
+                book_now: "ቀጠሮ ይያዙ",
+                whatsapp_us: "በዋትስአፕ ያነጋገሩን",
+                video_caption: "የሜሽ ክሊኒክ መግቢያ እና የተቋም አጠቃላይ እይታ",
+                footer_desc: "ሜሽ ክሊኒክ በጅጅጋ ከተማ በባለሙያ ሐኪሞች እና በዘመናዊ የምርመራ ድጋፍ የታገዘ ጥራት ያለው የህክምና አገልግሎት ይሰጣል።",
+                footer_quick_links: "ፈጣን አገናኞች",
+                footer_departments: "ክፍሎች",
+                footer_contact: "አግኙን",
+                privacy_policy: "የግላዊነት ፖሊሲ",
+                terms_service: "የአገልግሎት ውሎች",
+                book_modal_title: "ቀጠሮዎን ይያዙ",
+                book_modal_sub: "በሜሽ ክሊኒክ ለመታከም ዝርዝር መረጃዎን ይሙሉ አጭር መረጃ።",
+                label_fullname: "ሙሉ ስም",
+                label_phone: "ስልክ ቁጥር",
+                label_dept: "ክፍል",
+                label_date: "የሚፈልጉት ቀን",
+                label_time: "የሚፈልጉት ሰዓት",
+                confirm_booking_btn: "የቀጠሮ ጥያቄውን ያረጋግጡ",
+                toast_title: "ቀጠሮ ተጠይቋል!",
+                toast_sub: "ለማረጋገጫ በ 0915737157 እንደውልልዎታለን።"
+            },
+            so: {
+                emergency_label: "Degdeg",
+                hours_label: "Furan 24/7 Adeegga Degdga & Jiifka",
+                tagline: "Xarun Caafimaad oo Gaar loo leeyahay",
+                nav_home: "Bogga Hore",
+                nav_doctors: "Takhasusyada",
+                nav_services: "Adeegyada",
+                nav_gallery: "Sawirada",
+                nav_story: "Sheekadeena",
+                nav_contact: "Nala Soo Xiriir",
+                ai_assistant_btn: "Kaaliyaha AI",
+                book_btn: "Ballansato",
+                hero_badge: "Xarunta Caafimaad ee Hormuudka ka ah Jigjiga",
+                hero_title_1: "Daryeel Caafimaad oo Khibrad Leh",
+                hero_title_2: "Iyadoo Loo Jeedinayo Qoyskaaga.",
+                hero_desc: "Mesh Clinic waxay bixisaa daryeel caafimaad oo lagu kalsoonaan karo iyadoo ay joogaan dhakhaatiir khibrad leh, tignoolajiyad casri ah, iyo daryeel qoyskaaga ku habboon.",
+                book_appointment_cta: "Ballan Qabso",
+                whatsapp_cta: "Nagala Hadal WhatsApp",
+                welcome_mesh: "Ku soo dhowow Mesh Clinic",
+                intro_heading: "U Hellan Caafimaadka & Mustaqbalka Qoyskaaga",
+                intro_text: "Mesh Clinic waxay ku taallaa bartamaha Jigjiga. Waxaan isku darnay dhakhaatiir khibrad leh, qalab casri ah, iyo daryeel naxariis leh oo hal meel looga adeegayo.",
+                call_us_now: "Na Soo Wac Hadda",
+                whatsapp_chat: "Taageerada WhatsApp",
+                expert_team: "Kooxda Caafimaadka",
+                specialists_heading: "La Kulanto Dhakhaatiirteena Takhasuska Leh",
+                specialists_sub: "La tasho dhakhaatiir sare oo u heellan caafimaadkaaga iyo bogsashadaada degdeg ah.",
+                book_consultation: "Ballansato La-tashi",
+                book_appointment_card: "Ballan Qabso",
+                doc_spec_1: "Dhakhtarka Guud",
+                doc_exp_1: "Dhakhtar Caafimaad oo Khibrad Leh • Daryeelka Aasaasiga ah",
+                doc_spec_2: "Takhasusaha Cudurada Gudaha",
+                doc_exp_2: "Ogaanshaha Cudurada & Daryeelka Joogtada ah",
+                doc_spec_3: "Cilmiga Carruurta & Qoyska",
+                doc_exp_3: "Caafimaadka Carruurta & Tallaalka",
+                doc_spec_4: "Qalliinka & Lafaha",
+                doc_exp_4: "Khabiir Qalliin & Daryeelka Degdegga ah",
+                clinical_services: "Adeegyada Caafimaadka",
+                services_heading: "Waaxyheena",
+                serv_1_title: "Daawada Guud & La-tashiga",
+                serv_1_desc: "Qiimaynta caafimaadka aasaasiga ah, maaraynta cudurada joogtada ah, iyo daryeelka ka hortagga ah.",
+                serv_2_title: "Baaritaannada & Shaybaarka",
+                serv_2_desc: "Baaritaanno shaybaar oo sax ah, falanqaynta dhiigga, iyo ultrasound.",
+                serv_3_title: "Caafimaadka Carruurta & Hooyada",
+                serv_3_desc: "Daryeelka dhallaanka, barnaamijyada tallaalka, iyo taageerada uurka.",
+                learn_more: "Wax Dheeraad ah Baro",
+                patient_trust: "Kalsoonida Bukaanka",
+                testimonials_heading: "Waxaa Ay Bukaannadeedu Dhaheen",
+                testimonials_sub: "Fikradaha dhabta ah ee bukaannada ka helay daryeelka Mesh Clinic.",
+                test_1: "\"Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic.\"",
+                jigjiga_resident: "Degganaha Jigjiga",
+                test_2: "\"Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic.\"",
+                local_patient: "Bukaanka Deegaanka",
+                test_3: "\"Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic.\"",
+                community_member: "Xubin Bulshada ka tirsan",
+                our_story_badge: "Sheekadeena",
+                story_heading: "Dhisidda Kalsoonida & Daryeelka Tayada Leh ee Jigjiga",
+                story_desc: "Mesh Clinic waxay ka bilaabatay aragti fudud: in la bixiyo daryeel caafimaad oo tayo sarreeya oo ay weheliso naxariis bani'aadamnimo.",
+                book_now: "Ballan Qabso",
+                whatsapp_us: "Nagala Xiriir WhatsApp",
+                video_caption: "Hordhaca & Dulmarka Xarunta Mesh Clinic",
+                footer_desc: "Mesh Clinic waxay bixisaa adeegyo caafimaad oo heersare ah oo ay weheliyaan dhakhaatiir khibrad leh iyo taageero shaybaar oo Jigjiga ku taalla.",
+                footer_quick_links: "Xiriirinta Degdegga ah",
+                footer_departments: "Waaxyaha",
+                footer_contact: "Nala Soo Xiriir",
+                privacy_policy: "Siyaasadda Khaas ahaanshaha",
+                terms_service: "Shuruudaha Adeegga",
+                book_modal_title: "Ballansato Ballantaada",
+                book_modal_sub: "Buuxi faahfaahintaada si aad ballan uga qabsatid Mesh Clinic.",
+                label_fullname: "Magaca oo Buuxa",
+                label_phone: "Lambarka Telefoonka",
+                label_dept: "Waaxda",
+                label_date: "Taariikhda la doorbiday",
+                label_time: "Waqtiga la doorbiday",
+                confirm_booking_btn: "Xaqiiji Codsiga Ballanta",
+                toast_title: "Ballan ayaa la Codsaday!",
+                toast_sub: "Waxaanu ku soo wici doonaa 0915737157 si aanu u xaqiijino."
+            }
+        };
 
+        let currentLang = 'en';
+        function setLanguage(lang) {
+            currentLang = lang;
+            const dict = translations[lang] || translations['en'];
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) {
+                    el.textContent = dict[key];
+                }
+            });
+            const labels = { en: 'English', am: 'አማርኛ', so: 'Af-Somali' };
+            const shortLabels = { en: 'EN', am: 'AM', so: 'SO' };
+            document.getElementById('current-lang-label').textContent = labels[lang];
+            document.getElementById('mobile-lang-label').textContent = shortLabels[lang];
+            document.getElementById('lang-dropdown').classList.add('hidden');
+        }
+
+        function toggleLangDropdown() {
+            const dropdown = document.getElementById('lang-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        window.addEventListener('click', (e) => {
+            if (!e.target.closest('button[onclick="toggleLangDropdown()"]')) {
+                const dropdown = document.getElementById('lang-dropdown');
+                if (dropdown && !dropdown.classList.contains('hidden')) {
+                    dropdown.classList.add('hidden');
+                }
+            }
+        });
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        function openBookingModal() {
+            document.getElementById('booking-modal').classList.remove('hidden');
+        }
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+
+        function handleModalSubmit(event) {
+            event.preventDefault();
+            closeBookingModal();
+            showToast();
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast-notification');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4500);
+        }
+
+        function openServiceModal(serviceName) {
+            openBookingModal();
+            const deptSelect = document.getElementById('modal-dept');
+            for(let i=0; i<deptSelect.options.length; i++) {
+                if(deptSelect.options[i].text.includes(serviceName)) {
+                    deptSelect.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        function playVideoPlaceholder() {
+            showToastMessage("Video player loading. You can watch Mesh Clinic's introduction video or call 0915737157!");
+        }
+
+        function showToastMessage(msg) {
+            const toast = document.getElementById('toast-notification');
+            toast.querySelector('h4').textContent = "Mesh Clinic Notice";
+            toast.querySelector('p').textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4500);
+        }
+
+        // Specialist Filtering Logic
+        function filterSpecialists(category) {
+            const cards = document.querySelectorAll('.spec-card');
+            const buttons = ['all', 'general', 'internal', 'pediatrics', 'surgery'];
+            
+            buttons.forEach(btn => {
+                const bEl = document.getElementById(`filter-${btn}`);
+                if(bEl) {
+                    if(btn === category) {
+                        bEl.className = "px-4 py-2 rounded-xl text-xs font-bold bg-medical-primary text-white shadow-sm transition";
+                    } else {
+                        bEl.className = "px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition";
+                    }
+                }
+            });
+
+            cards.forEach(card => {
+                if(category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // AI Chat Widget Logic
+        function toggleChat() {
+            const chatWin = document.getElementById('ai-chat-window');
+            chatWin.classList.toggle('hidden');
+        }
+
+        function handleChatKey(e) {
+            if(e.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function sendQuickPrompt(text) {
+            document.getElementById('chat-input').value = text;
+            sendChatMessage();
+        }
+
+        function sendChatMessage() {
+            const inputEl = document.getElementById('chat-input');
+            const msg = inputEl.value.trim();
+            if(!msg) return;
+            const chatMessages = document.getElementById('chat-messages');
+            
+            chatMessages.innerHTML += `
+                <div class="flex items-start justify-end space-x-2">
+                    <div class="bg-medical-primary text-white p-3 rounded-2xl rounded-tr-sm text-sm shadow-sm max-w-[85%]">
+                        ${escapeHtml(msg)}
+                    </div>
+                </div>
+            `;
+            inputEl.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            setTimeout(() => {
+                let reply = "Thank you for reaching out to Mesh Clinic in Jijiga! We are open 24/7 for emergencies. You can reach us directly at 0915737157 or via WhatsApp at +251915737157.";
+                const lower = msg.toLowerCase();
+                if (lower.includes('appointment') || lower.includes('book') || lower.includes('ቀጠሮ') || lower.includes('ballansato')) {
+                    reply = "You can easily book an appointment by clicking the 'Book Appointment' button at the top of the page or calling us at 0915737157.";
+                } else if (lower.includes('phone') || lower.includes('number') || lower.includes('call') || lower.includes('ስልክ')) {
+                    reply = "Mesh Clinic phone number & WhatsApp: 0915737157 (+251915737157).";
+                } else if (lower.includes('address') || lower.includes('location') || lower.includes('where') || lower.includes('አድራሻ')) {
+                    reply = "Mesh Clinic is centrally located in Jijiga (Map code: 9Q2X+7V2).";
+                } else if (lower.includes('hour') || lower.includes('time') || lower.includes('open') || lower.includes('ሰዓት')) {
+                    reply = "Mesh Clinic emergency & inpatient care is open 24 hours a day, 7 days a week!";
+                }
+
+                chatMessages.innerHTML += `
+                    <div class="flex items-start space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-medical-primary text-white flex items-center justify-center text-xs font-bold shrink-0">AI</div>
+                        <div class="bg-white border border-slate-200 p-3 rounded-2xl rounded-tl-sm text-slate-700 text-sm shadow-sm max-w-[85%]">
+                            ${escapeHtml(reply)}
+                        </div>
+                    </div>
+                `;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 700);
+        }
+
+        function escapeHtml(text) {
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // Automatic Hero Background Slider & Three.js Background Animation
+        window.addEventListener('load', () => {
+            const bgSlides = document.querySelectorAll('.hero-bg-slide');
+            if (bgSlides.length > 0) {
+                let currentBg = 0;
+                setInterval(() => {
+                    bgSlides[currentBg].classList.remove('opacity-100');
+                    bgSlides[currentBg].classList.add('opacity-0');
+                    currentBg = (currentBg + 1) % bgSlides.length;
+                    bgSlides[currentBg].classList.remove('opacity-0');
+                    bgSlides[currentBg].classList.add('opacity-100');
+                }, 5000);
+            }
+
+            const canvas = document.querySelector('#hero-canvas');
+            if(canvas) {
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+                
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                
+                const particlesGeometry = new THREE.BufferGeometry();
+                const particlesCount = 220;
+                const posArray = new Float32Array(particlesCount * 3);
+                for(let i = 0; i < particlesCount * 3; i++) {
+                    posArray[i] = (Math.random() - 0.5) * 16;
+                }
+                particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                
+                const particlesMaterial = new THREE.PointsMaterial({
+                    size: 0.045,
+                    color: 0x38bdf8,
+                    transparent: true,
+                    opacity: 0.65
+                });
+                const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+                scene.add(particlesMesh);
+                camera.position.z = 5;
+
+                const clock = new THREE.Clock();
+                function animate() {
+                    requestAnimationFrame(animate);
+                    const elapsedTime = clock.getElapsedTime();
+                    particlesMesh.rotation.y = elapsedTime * 0.03;
+                    particlesMesh.rotation.x = elapsedTime * 0.015;
+                    renderer.render(scene, camera);
+                }
+                animate();
+
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
