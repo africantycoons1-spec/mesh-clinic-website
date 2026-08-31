@@ -103,12 +103,14 @@
             
             <!-- Desktop Navigation Links -->
             <nav class="hidden lg:flex items-center space-x-6 font-medium text-sm text-slate-600">
-  <a href="index.html" class="text-blue-600 font-semibold">Home</a>
-  <a href="doctors.html" class="hover:text-blue-600 transition">Specialists</a>
-  <a href="medical_services.html" class="hover:text-blue-600 transition">Services</a>
-  <a href="patient_info.html" class="hover:text-blue-600 transition">Patient Info</a>
-  <a href="index.html#contact" class="hover:text-blue-600 transition">Contact</a>
-</nav>
+                <a href="#home" class="text-medical-primary font-semibold transition hover:text-medical-primary" data-i18n="nav_home">Home</a>
+                <a href="#specialists" class="hover:text-medical-primary transition" data-i18n="nav_doctors">Specialists</a>
+                <a href="#services" class="hover:text-medical-primary transition" data-i18n="nav_services">Services</a>
+                <a href="#gallery" class="hover:text-medical-primary transition" data-i18n="nav_gallery">Gallery</a>
+                <a href="#story" class="hover:text-medical-primary transition" data-i18n="nav_story">Our Story</a>
+                <a href="#contact" class="hover:text-medical-primary transition" data-i18n="nav_contact">Contact</a>
+            </nav>
+
             <div class="hidden sm:flex items-center space-x-3">
                 <!-- Language Selector Dropdown -->
                 <div class="relative">
@@ -162,7 +164,7 @@
         </div>
     </header>
 
-    <section id="home" class="relative text-white py-24 lg:py-36 overflow-hidden min-h-[680px] flex items-center">
+    <section id="home" class="relative text-white py-16 sm:py-24 lg:py-36 overflow-hidden min-h-[580px] lg:min-h-[680px] flex items-center">
         <!-- Background Slide 1 -->
         <div class="hero-bg-slide absolute inset-0 transition-opacity duration-1000 opacity-100 z-0">
             <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnGqHzCo6jcirV8T6G8QQlM_lPrar8N_kANickF7V_nbTUDKh8FZcYfDqC3b1ReG951IT4W8KL5Mj0UXLt79IWEvSm2Qgv6N7Y3s9aV9HjsI0xVJbFETLd6nWh-6kH0RuXh-F3H1d3z0HY=s680-w680-h510-rw" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/0284c7/ffffff?text=Mesh+Clinic+Gate';" alt="Mesh Clinic Gate" class="w-full h-full object-cover">
@@ -171,31 +173,32 @@
         <div class="hero-bg-slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
             <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkrn4OvsprmCo3iAaTQkJ-C4FlwbewDi4UMALiuXLKb16TBh_jGnwxGnQ7clYGh-gvC7k6Wf6aspsZd1-hv1yIkNvFYA33Yu7PMdF7w6CUJfGV9XnEdMXKqNe3mV5yhBq50bEbrpgalpDY=s680-w680-h510-rw" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/0d9488/ffffff?text=Mesh+Clinic+Entrance';" alt="Mesh Clinic Entrance" class="w-full h-full object-cover">
         </div>
-        <!-- Subtle Dark Text Readability Gradient Overlay (Left side only for text, right side fully clear) -->
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/40 to-transparent z-1"></div>
+        <!-- Subtle Dark Text Readability Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/50 to-transparent z-1"></div>
         <!-- Three.js Particle Canvas -->
         <canvas class="webgl" id="hero-canvas"></canvas>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10 w-full">
-            <div class="max-w-3xl space-y-6 text-center lg:text-left">
+            <div class="max-w-3xl space-y-4 lg:space-y-6 text-center lg:text-left">
                 <div class="inline-flex items-center space-x-2 bg-slate-900/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700 text-xs font-semibold text-medical-200 shadow-sm">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                     <span data-i18n="hero_badge">Jigjiga's Leading Private Healthcare Clinic</span>
                 </div>
-                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight text-white">
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white">
                     <span data-i18n="hero_title_1">MESH Medical And Surgical</span> <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-sky-300" data-i18n="hero_title_2">Speciality Clinic</span>
                 </h1>
-                <p class="text-lg text-slate-200 max-w-2xl font-normal leading-relaxed drop-shadow" data-i18n="hero_desc">
+                <!-- Hidden on mobile, visible on desktop -->
+                <p class="hidden md:block text-lg text-slate-200 max-w-2xl font-normal leading-relaxed drop-shadow" data-i18n="hero_desc">
                     Your Health Is Our Priority. With experienced specialists, modern diagnostic technology, and patient-centered treatment tailored for your family's well-being at Mesh Clinic in Jijiga.
                 </p>
-                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                    <button onclick="openBookingModal()" class="w-full sm:w-auto bg-medical-primary hover:bg-medical-secondary text-white font-bold px-7 py-4 rounded-xl shadow-xl hover:scale-105 transition transform duration-200 flex items-center justify-center">
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
+                    <button onclick="openBookingModal()" class="w-full sm:w-auto bg-medical-primary hover:bg-medical-secondary text-white font-bold px-6 py-3.5 rounded-xl shadow-xl hover:scale-105 transition transform duration-200 flex items-center justify-center text-sm sm:text-base">
                         <i class="fa-solid fa-calendar-plus mr-2"></i> <span data-i18n="book_appointment_cta">Book An Appointment</span>
                     </button>
-                    <a href="https://wa.me/251915737157" target="_blank" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-7 py-4 rounded-xl shadow-lg transition text-center flex items-center justify-center">
+                    <a href="https://wa.me/251915737157" target="_blank" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg transition text-center flex items-center justify-center text-sm sm:text-base">
                         <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> <span data-i18n="whatsapp_cta">Chat on WhatsApp</span>
                     </a>
-                    <button onclick="toggleChat()" class="w-full sm:w-auto bg-slate-800/80 hover:bg-slate-700 border border-slate-600 text-white font-semibold px-7 py-4 rounded-xl shadow-lg transition flex items-center justify-center backdrop-blur-md">
+                    <button onclick="toggleChat()" class="w-full sm:w-auto bg-slate-800/80 hover:bg-slate-700 border border-slate-600 text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center backdrop-blur-md text-sm sm:text-base">
                         <i class="fa-solid fa-robot text-medical-primary mr-2"></i> <span data-i18n="ai_assistant_btn">AI Assistant</span>
                     </button>
                 </div>
@@ -203,211 +206,340 @@
         </div>
     </section>
 
-    <section class="py-16 max-w-6xl mx-auto px-4">
-        <div class="bg-white rounded-3xl shadow-lg p-8 md:p-12 border border-slate-100 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-8 space-y-4">
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-medical-primary tracking-tight" data-i18n="welcome_mesh">Welcome to Mesh Clinic</h2>
-                <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
-                    Mesh Clinic is located in the heart of Jijiga (<a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-medical-primary underline font-semibold">9Q2X+7V2, Jijiga Map</a>).
-                </p>
-                <div class="flex items-center space-x-3 bg-rose-50 border border-rose-200 p-4 rounded-2xl text-rose-700 font-extrabold text-sm sm:text-base shadow-md">
-                    <i class="fa-solid fa-phone-volume text-rose-600 text-xl animate-pulse"></i>
-                    <span>CALL THESE NUMBERS FOR EMERGENCY!</span>
-                    <div class="ml-auto flex items-center space-x-1 text-medical-primary">
-                        <i class="fa-solid fa-arrow-right text-2xl animate-bounce"></i>
-                        <i class="fa-solid fa-arrow-right text-xl opacity-75 animate-pulse hidden sm:inline-block"></i>
+    <!-- Welcome Section -->
+    <section class="w-full bg-slate-100/90 py-16 lg:py-24 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="bg-white rounded-3xl shadow-xl p-6 sm:p-12 border border-slate-100 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-8 space-y-4">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-medical-primary tracking-tight" data-i18n="welcome_mesh">Welcome to Mesh Clinic</h2>
+                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                        Mesh Clinic is located in the heart of Jijiga (<a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-medical-primary underline font-semibold">9Q2X+7V2, Jijiga Map</a>).
+                    </p>
+                    <div class="flex items-center space-x-3 bg-rose-50 border border-rose-200 p-4 rounded-2xl text-rose-700 font-extrabold text-xs sm:text-base shadow-md">
+                        <i class="fa-solid fa-phone-volume text-rose-600 text-xl animate-pulse"></i>
+                        <span>CALL THESE NUMBERS FOR EMERGENCY!</span>
+                        <div class="ml-auto flex items-center space-x-1 text-medical-primary">
+                            <i class="fa-solid fa-arrow-right text-2xl animate-bounce"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="lg:col-span-4 flex flex-col space-y-3">
-                <a href="tel:0915737157" class="bg-medical-50 hover:bg-medical-100 border border-medical-200 p-4 rounded-2xl flex items-center space-x-4 transition">
-                    <div class="w-12 h-12 rounded-xl bg-medical-primary text-white flex items-center justify-center text-lg font-bold shrink-0 shadow">
-                        <i class="fa-solid fa-phone"></i>
-                    </div>
-                    <div>
-                        <span class="text-xs text-slate-500 font-medium block" data-i18n="call_us_now">Call Us Now</span>
-                        <strong class="text-slate-900 text-sm font-bold font-mono">0915737157</strong>
-                    </div>
-                </a>
-                <a href="https://wa.me/251915737157" target="_blank" class="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 p-4 rounded-2xl flex items-center space-x-4 transition">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg font-bold shrink-0 shadow">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </div>
-                    <div>
-                        <span class="text-xs text-slate-500 font-medium block" data-i18n="whatsapp_chat">WhatsApp Support</span>
-                        <strong class="text-slate-900 text-sm font-bold font-mono">+251915737157</strong>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="specialists" class="py-16 max-w-7xl mx-auto px-4 sm:px-8">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-8">
-            <div class="space-y-3">
-                <span class="text-medical-primary font-bold uppercase tracking-widest text-xs bg-medical-50 px-3.5 py-1.5 rounded-full" data-i18n="expert_team">Expert Medical Team</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900" data-i18n="specialists_heading">Meet Our Dedicated Specialists</h2>
-                <p class="text-slate-600 max-w-xl text-sm sm:text-base" data-i18n="specialists_sub">Consult with senior physicians and specialists committed to your health and rapid recovery.</p>
-            </div>
-            <button onclick="openBookingModal()" class="mt-4 md:mt-0 text-medical-primary font-bold text-sm flex items-center hover:underline">
-                <span data-i18n="book_consultation">Book Consultation</span> <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
-            </button>
-        </div>
-
-        <!-- Filter Buttons for Specialists -->
-        <div class="flex flex-wrap gap-2 mb-8">
-            <button onclick="filterSpecialists('all')" id="filter-all" class="px-4 py-2 rounded-xl text-xs font-bold bg-medical-primary text-white shadow-sm transition">All Specialists</button>
-            <button onclick="filterSpecialists('general')" id="filter-general" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition">General Practice</button>
-            <button onclick="filterSpecialists('internal')" id="filter-internal" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition">Internal Medicine</button>
-            <button onclick="filterSpecialists('pediatrics')" id="filter-pediatrics" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition">Pediatrics</button>
-            <button onclick="filterSpecialists('surgery')" id="filter-surgery" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition">Surgery & Orthopedics</button>
-        </div>
-
-        <div id="specialists-grid" class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-            <!-- Doctor 1 -->
-            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="general">
-                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4w38oUiNLsWGa7jvDRKYSAbmbT122MFWsPC_wqXjoZg&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Ahmed';" alt="Dr. Ahmed Omar" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
-                    </div>
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="font-bold text-slate-900 text-sm">Dr. Ahmed Omar</h3>
-                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1" data-i18n="doc_spec_1">General Practitioner</p>
-                    <p class="text-[10px] text-slate-500">Primary Care</p>
-                </div>
-            </div>
-            <!-- Doctor 2 -->
-            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="internal">
-                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4-0ai-2w0g0B8JVALQp3K8eFGDCeI83Pru3f2CAZMTQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Fatima';" alt="Dr. Fatima Hassan" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
-                    </div>
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="font-bold text-slate-900 text-sm">Dr. Fatima Hassan</h3>
-                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1" data-i18n="doc_spec_2">Internal Medicine</p>
-                    <p class="text-[10px] text-slate-500">Chronic Care</p>
-                </div>
-            </div>
-            <!-- Doctor 3 -->
-            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="pediatrics">
-                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaPSQ5HaUEtCaU2iePUcLNAkBoSB0c62Mp4EGkyG_K7w&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Ibrahim';" alt="Dr. Ibrahim Yusuf" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
-                    </div>
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="font-bold text-slate-900 text-sm">Dr. Ibrahim Yusuf</h3>
-                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1" data-i18n="doc_spec_3">Pediatrics</p>
-                    <p class="text-[10px] text-slate-500">Child Health</p>
-                </div>
-            </div>
-            <!-- Doctor 4 -->
-            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="surgery">
-                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCNWDgE3dHUzy8Ak4ra4YdTV6hK288xK6zInm2I6PwwQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Samira';" alt="Dr. Samira Abdi" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
-                    </div>
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="font-bold text-slate-900 text-sm">Dr. Samira Abdi</h3>
-                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1" data-i18n="doc_spec_4">Surgery</p>
-                    <p class="text-[10px] text-slate-500">Trauma Care</p>
-                </div>
-            </div>
-            <!-- Doctor 5 -->
-            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="internal">
-                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ27EhKVotCvokwOkU09_tueECsksa98n33XIsGrWEGvA&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Mohamed';" alt="Dr. Mohamed Ali" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
-                    </div>
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="font-bold text-slate-900 text-sm">Dr. Mohamed Ali</h3>
-                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Cardiology</p>
-                    <p class="text-[10px] text-slate-500">Heart Specialist</p>
-                </div>
-            </div>
-            <!-- Doctor 6 -->
-            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="general">
-                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbDbIC8QI8J-S3mLXorPegjFoyk4InOSyQ0NPL6t1sw&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Aysha';" alt="Dr. Aysha Nur" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
-                    </div>
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="font-bold text-slate-900 text-sm">Dr. Aysha Nur</h3>
-                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Dermatology</p>
-                    <p class="text-[10px] text-slate-500">Skin Specialist</p>
-                </div>
-            </div>
-            <!-- Doctor 7 -->
-            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="surgery">
-                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRryw-KclIIgZVTMNWLsxIPFwpFMEhpdLSssI14Xnh82w&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Liban';" alt="Dr. Liban Jama" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
-                    </div>
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="font-bold text-slate-900 text-sm">Dr. Liban Jama</h3>
-                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Ophthalmology</p>
-                    <p class="text-[10px] text-slate-500">Eye Specialist</p>
-                </div>
-            </div>
-            <!-- Doctor 8 -->
-            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="pediatrics">
-                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtTxZZIFE78yll0i3a6q-ZGVgR5SIUeySf9uXaxylFAQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Hodan';" alt="Dr. Hodan Warsame" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
-                    </div>
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="font-bold text-slate-900 text-sm">Dr. Hodan Warsame</h3>
-                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Gynecology</p>
-                    <p class="text-[10px] text-slate-500">Women's Health</p>
-                </div>
-            </div>
-            <!-- Doctor 9 -->
-            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="internal">
-                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvg4gXYnbfWtU1iw4rGYM0xqxSkUl9r_wxIhiG42wTVA&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Mahad';" alt="Dr. Mahad Farah" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
-                    </div>
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="font-bold text-slate-900 text-sm">Dr. Mahad Farah</h3>
-                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Neurology</p>
-                    <p class="text-[10px] text-slate-500">Brain & Nerve</p>
-                </div>
-            </div>
-            <!-- Doctor 10 -->
-            <div class="spec-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group" data-category="general">
-                <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1chBRuWzJWDdADpxBa9zyLZx-oU5Tt8J2nCW8244_Kg&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Specialist';" alt="Dr. Specialist" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                        <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
-                    </div>
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="font-bold text-slate-900 text-sm">Dr. Mesh Specialist</h3>
-                    <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Specialist Physician</p>
-                    <p class="text-[10px] text-slate-500">Advanced Treatment</p>
+                <div class="lg:col-span-4 flex flex-col space-y-3">
+                    <a href="tel:0915737157" class="bg-medical-50 hover:bg-medical-100 border border-medical-200 p-4 rounded-2xl flex items-center space-x-4 transition">
+                        <div class="w-12 h-12 rounded-xl bg-medical-primary text-white flex items-center justify-center text-lg font-bold shrink-0 shadow">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-500 font-medium block" data-i18n="call_us_now">Call Us Now</span>
+                            <strong class="text-slate-900 text-sm font-bold font-mono">0915737157</strong>
+                        </div>
+                    </a>
+                    <a href="https://wa.me/251915737157" target="_blank" class="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 p-4 rounded-2xl flex items-center space-x-4 transition">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg font-bold shrink-0 shadow">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-500 font-medium block" data-i18n="whatsapp_chat">WhatsApp Support</span>
+                            <strong class="text-slate-900 text-sm font-bold font-mono">+251915737157</strong>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="services" class="py-16 bg-slate-100/60 border-y border-slate-200/60">
+    <!-- Specialists Section -->
+    <section id="specialists" class="w-full bg-white py-16 lg:py-24 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10">
+                <div class="space-y-3">
+                    <span class="text-medical-primary font-bold uppercase tracking-widest text-xs bg-medical-50 px-3.5 py-1.5 rounded-full" data-i18n="expert_team">Expert Medical Team</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900" data-i18n="specialists_heading">Meet Our Dedicated Specialists</h2>
+                    <p class="text-slate-600 max-w-xl text-sm sm:text-base" data-i18n="specialists_sub">Consult with senior physicians and specialists committed to your health and rapid recovery.</p>
+                </div>
+                <button onclick="openBookingModal()" class="hidden md:flex mt-4 md:mt-0 text-medical-primary font-bold text-sm items-center hover:underline">
+                    <span data-i18n="book_consultation">Book Consultation</span> <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                </button>
+            </div>
+
+            <!-- Filter Buttons for Specialists (Desktop) -->
+            <div class="hidden md:flex flex-wrap gap-2 mb-8">
+                <button onclick="filterSpecialists('all')" id="filter-all" class="px-4 py-2 rounded-xl text-xs font-bold bg-medical-primary text-white shadow-sm transition">All Specialists</button>
+                <button onclick="filterSpecialists('general')" id="filter-general" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 transition">General Practice</button>
+                <button onclick="filterSpecialists('internal')" id="filter-internal" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 transition">Internal Medicine</button>
+                <button onclick="filterSpecialists('pediatrics')" id="filter-pediatrics" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 transition">Pediatrics</button>
+                <button onclick="filterSpecialists('surgery')" id="filter-surgery" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 transition">Surgery & Orthopedics</button>
+            </div>
+
+            <!-- DESKTOP 10-DOCTOR GRID (Hidden on Mobile) -->
+            <div id="specialists-grid" class="hidden md:grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Doctor 1 -->
+                <div class="spec-card bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group" data-category="general">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4w38oUiNLsWGa7jvDRKYSAbmbT122MFWsPC_wqXjoZg&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Ahmed';" alt="Dr. Ahmed Omar" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                            <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                        </div>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-bold text-slate-900 text-sm">Dr. Ahmed Omar</h3>
+                        <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1" data-i18n="doc_spec_1">General Practitioner</p>
+                        <p class="text-[10px] text-slate-500">Primary Care</p>
+                    </div>
+                </div>
+                <!-- Doctor 2 -->
+                <div class="spec-card bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group" data-category="internal">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4-0ai-2w0g0B8JVALQp3K8eFGDCeI83Pru3f2CAZMTQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Fatima';" alt="Dr. Fatima Hassan" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                            <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                        </div>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-bold text-slate-900 text-sm">Dr. Fatima Hassan</h3>
+                        <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1" data-i18n="doc_spec_2">Internal Medicine</p>
+                        <p class="text-[10px] text-slate-500">Chronic Care</p>
+                    </div>
+                </div>
+                <!-- Doctor 3 -->
+                <div class="spec-card bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group" data-category="pediatrics">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaPSQ5HaUEtCaU2iePUcLNAkBoSB0c62Mp4EGkyG_K7w&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Ibrahim';" alt="Dr. Ibrahim Yusuf" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                            <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                        </div>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-bold text-slate-900 text-sm">Dr. Ibrahim Yusuf</h3>
+                        <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1" data-i18n="doc_spec_3">Pediatrics</p>
+                        <p class="text-[10px] text-slate-500">Child Health</p>
+                    </div>
+                </div>
+                <!-- Doctor 4 -->
+                <div class="spec-card bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group" data-category="surgery">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCNWDgE3dHUzy8Ak4ra4YdTV6hK288xK6zInm2I6PwwQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Samira';" alt="Dr. Samira Abdi" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                            <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                        </div>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-bold text-slate-900 text-sm">Dr. Samira Abdi</h3>
+                        <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1" data-i18n="doc_spec_4">Surgery</p>
+                        <p class="text-[10px] text-slate-500">Trauma Care</p>
+                    </div>
+                </div>
+                <!-- Doctor 5 -->
+                <div class="spec-card bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group" data-category="internal">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ27EhKVotCvokwOkU09_tueECsksa98n33XIsGrWEGvA&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Mohamed';" alt="Dr. Mohamed Ali" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                            <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                        </div>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-bold text-slate-900 text-sm">Dr. Mohamed Ali</h3>
+                        <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Cardiology</p>
+                        <p class="text-[10px] text-slate-500">Heart Specialist</p>
+                    </div>
+                </div>
+                <!-- Doctor 6 -->
+                <div class="spec-card bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group" data-category="general">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbDbIC8QI8J-S3mLXorPegjFoyk4InOSyQ0NPL6t1sw&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Aysha';" alt="Dr. Aysha Nur" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                            <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                        </div>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-bold text-slate-900 text-sm">Dr. Aysha Nur</h3>
+                        <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Dermatology</p>
+                        <p class="text-[10px] text-slate-500">Skin Specialist</p>
+                    </div>
+                </div>
+                <!-- Doctor 7 -->
+                <div class="spec-card bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group" data-category="surgery">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRryw-KclIIgZVTMNWLsxIPFwpFMEhpdLSssI14Xnh82w&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Liban';" alt="Dr. Liban Jama" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                            <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                        </div>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-bold text-slate-900 text-sm">Dr. Liban Jama</h3>
+                        <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Ophthalmology</p>
+                        <p class="text-[10px] text-slate-500">Eye Specialist</p>
+                    </div>
+                </div>
+                <!-- Doctor 8 -->
+                <div class="spec-card bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group" data-category="pediatrics">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtTxZZIFE78yll0i3a6q-ZGVgR5SIUeySf9uXaxylFAQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Hodan';" alt="Dr. Hodan Warsame" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                            <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                        </div>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-bold text-slate-900 text-sm">Dr. Hodan Warsame</h3>
+                        <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Gynecology</p>
+                        <p class="text-[10px] text-slate-500">Women's Health</p>
+                    </div>
+                </div>
+                <!-- Doctor 9 -->
+                <div class="spec-card bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group" data-category="internal">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvg4gXYnbfWtU1iw4rGYM0xqxSkUl9r_wxIhiG42wTVA&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Mahad';" alt="Dr. Mahad Farah" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                            <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                        </div>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-bold text-slate-900 text-sm">Dr. Mahad Farah</h3>
+                        <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Neurology</p>
+                        <p class="text-[10px] text-slate-500">Brain & Nerve</p>
+                    </div>
+                </div>
+                <!-- Doctor 10 -->
+                <div class="spec-card bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group" data-category="general">
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1chBRuWzJWDdADpxBa9zyLZx-oU5Tt8J2nCW8244_Kg&s=10" onerror="this.onerror=null;this.src='https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Specialist';" alt="Dr. Specialist" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                            <button onclick="openBookingModal()" class="w-full bg-white text-slate-900 font-bold py-2 rounded-xl text-xs shadow" data-i18n="book_appointment_card">Book Appointment</button>
+                        </div>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h3 class="font-bold text-slate-900 text-sm">Dr. Mesh Specialist</h3>
+                        <p class="text-[11px] text-medical-primary font-semibold uppercase tracking-wider mb-1">Specialist Physician</p>
+                        <p class="text-[10px] text-slate-500">Advanced Treatment</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MOBILE 4-GROUP COMPACT SPECIALISTS VIEW (Visible on Mobile Only, md:hidden) -->
+            <div class="md:hidden space-y-8">
+                
+                <!-- Group 1: General Practice (3 doctors) -->
+                <div>
+                    <div class="border-b border-slate-200 pb-2 mb-4">
+                        <h3 class="font-bold text-medical-primary text-sm uppercase tracking-wider">General Practice</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <!-- Doc 1 (Dr. Ahmed Omar) -->
+                        <div onclick="openBookingModal()" class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 p-2.5 flex flex-col items-center text-center shadow-xs">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-slate-100">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4w38oUiNLsWGa7jvDRKYSAbmbT122MFWsPC_wqXjoZg&s=10" alt="Dr. Ahmed" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-xs line-clamp-1">Dr. Ahmed Omar</h4>
+                            <p class="text-[10px] text-medical-primary font-medium">General Practitioner</p>
+                        </div>
+                        <!-- Doc 2 (Dr. Aysha Nur) -->
+                        <div onclick="openBookingModal()" class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 p-2.5 flex flex-col items-center text-center shadow-xs">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-slate-100">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBbDbIC8QI8J-S3mLXorPegjFoyk4InOSyQ0NPL6t1sw&s=10" alt="Dr. Aysha" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-xs line-clamp-1">Dr. Aysha Nur</h4>
+                            <p class="text-[10px] text-medical-primary font-medium">Dermatology</p>
+                        </div>
+                        <!-- Doc 3 (Dr. Mesh Specialist) -->
+                        <div onclick="openBookingModal()" class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 p-2.5 flex flex-col items-center text-center shadow-xs col-span-2">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-slate-100">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1chBRuWzJWDdADpxBa9zyLZx-oU5Tt8J2nCW8244_Kg&s=10" alt="Dr. Mesh Specialist" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-xs line-clamp-1">Dr. Mesh Specialist</h4>
+                            <p class="text-[10px] text-medical-primary font-medium">Specialist Physician</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 2: Internal Medicine (3 doctors) -->
+                <div>
+                    <div class="border-b border-slate-200 pb-2 mb-4">
+                        <h3 class="font-bold text-medical-primary text-sm uppercase tracking-wider">Internal Medicine</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <!-- Doc 1 (Dr. Fatima Hassan) -->
+                        <div onclick="openBookingModal()" class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 p-2.5 flex flex-col items-center text-center shadow-xs">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-slate-100">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4-0ai-2w0g0B8JVALQp3K8eFGDCeI83Pru3f2CAZMTQ&s=10" alt="Dr. Fatima" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-xs line-clamp-1">Dr. Fatima Hassan</h4>
+                            <p class="text-[10px] text-medical-primary font-medium">Internal Medicine</p>
+                        </div>
+                        <!-- Doc 2 (Dr. Mohamed Ali) -->
+                        <div onclick="openBookingModal()" class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 p-2.5 flex flex-col items-center text-center shadow-xs">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-slate-100">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ27EhKVotCvokwOkU09_tueECsksa98n33XIsGrWEGvA&s=10" alt="Dr. Mohamed" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-xs line-clamp-1">Dr. Mohamed Ali</h4>
+                            <p class="text-[10px] text-medical-primary font-medium">Cardiology</p>
+                        </div>
+                        <!-- Doc 3 (Dr. Mahad Farah) -->
+                        <div onclick="openBookingModal()" class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 p-2.5 flex flex-col items-center text-center shadow-xs col-span-2">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-slate-100">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvg4gXYnbfWtU1iw4rGYM0xqxSkUl9r_wxIhiG42wTVA&s=10" alt="Dr. Mahad" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-xs line-clamp-1">Dr. Mahad Farah</h4>
+                            <p class="text-[10px] text-medical-primary font-medium">Neurology</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 3: Pediatrics (2 doctors) -->
+                <div>
+                    <div class="border-b border-slate-200 pb-2 mb-4">
+                        <h3 class="font-bold text-medical-primary text-sm uppercase tracking-wider">Pediatrics</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <!-- Doc 1 (Dr. Ibrahim Yusuf) -->
+                        <div onclick="openBookingModal()" class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 p-2.5 flex flex-col items-center text-center shadow-xs">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-slate-100">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaPSQ5HaUEtCaU2iePUcLNAkBoSB0c62Mp4EGkyG_K7w&s=10" alt="Dr. Ibrahim" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-xs line-clamp-1">Dr. Ibrahim Yusuf</h4>
+                            <p class="text-[10px] text-medical-primary font-medium">Pediatrics</p>
+                        </div>
+                        <!-- Doc 2 (Dr. Hodan Warsame) -->
+                        <div onclick="openBookingModal()" class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 p-2.5 flex flex-col items-center text-center shadow-xs">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-slate-100">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtTxZZIFE78yll0i3a6q-ZGVgR5SIUeySf9uXaxylFAQ&s=10" alt="Dr. Hodan" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-xs line-clamp-1">Dr. Hodan Warsame</h4>
+                            <p class="text-[10px] text-medical-primary font-medium">Gynecology</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 4: Surgery & Orthopedics (2 doctors) -->
+                <div>
+                    <div class="border-b border-slate-200 pb-2 mb-4">
+                        <h3 class="font-bold text-medical-primary text-sm uppercase tracking-wider">Surgery & Orthopedics</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <!-- Doc 1 (Dr. Samira Abdi) -->
+                        <div onclick="openBookingModal()" class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 p-2.5 flex flex-col items-center text-center shadow-xs">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-slate-100">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCNWDgE3dHUzy8Ak4ra4YdTV6hK288xK6zInm2I6PwwQ&s=10" alt="Dr. Samira" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-xs line-clamp-1">Dr. Samira Abdi</h4>
+                            <p class="text-[10px] text-medical-primary font-medium">Surgery</p>
+                        </div>
+                        <!-- Doc 2 (Dr. Liban Jama) -->
+                        <div onclick="openBookingModal()" class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 p-2.5 flex flex-col items-center text-center shadow-xs">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden mb-2 bg-slate-100">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRryw-KclIIgZVTMNWLsxIPFwpFMEhpdLSssI14Xnh82w&s=10" alt="Dr. Liban" class="w-full h-full object-cover">
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-xs line-clamp-1">Dr. Liban Jama</h4>
+                            <p class="text-[10px] text-medical-primary font-medium">Ophthalmology</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Departments Section -->
+    <section id="services" class="w-full bg-teal-50/50 py-16 lg:py-24 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
                 <span class="text-medical-primary font-bold uppercase tracking-widest text-xs bg-white px-3.5 py-1.5 rounded-full shadow-sm" data-i18n="clinical_services">Clinical Services</span>
@@ -416,7 +548,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Service 1 -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group">
                     <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-heart-pulse"></i>
                     </div>
@@ -427,7 +559,7 @@
                     </button>
                 </div>
                 <!-- Service 2 -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group">
                     <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-microscope"></i>
                     </div>
@@ -438,7 +570,7 @@
                     </button>
                 </div>
                 <!-- Service 3 -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group">
                     <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-child-reaching"></i>
                     </div>
@@ -449,7 +581,7 @@
                     </button>
                 </div>
                 <!-- Service 4 (Pharmacy) -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group">
                     <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-pills"></i>
                     </div>
@@ -460,7 +592,7 @@
                     </button>
                 </div>
                 <!-- Service 5 (ICU) -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group">
                     <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-bed-pulse"></i>
                     </div>
@@ -471,7 +603,7 @@
                     </button>
                 </div>
                 <!-- Service 6 (Emergency) -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 group">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group">
                     <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-truck-medical"></i>
                     </div>
@@ -485,224 +617,228 @@
         </div>
     </section>
 
-    <!-- Medical Image Gallery Section (Replacing BMI Calculator) -->
-    <section id="gallery" class="py-16 max-w-7xl mx-auto px-4 sm:px-8">
-        <div class="bg-gradient-to-br from-slate-900 to-medical-dark text-white rounded-3xl p-8 sm:p-12 shadow-xl space-y-8">
+    <!-- Facility Showcase Section (Full-Width Edge-to-Edge Dark Navy/Black Section with Optimized Mobile Grid) -->
+    <section id="gallery" class="w-full bg-slate-950 text-white py-16 sm:py-20 lg:py-28">
+        <div class="max-w-[1440px] mx-auto px-3 sm:px-8 space-y-8 sm:space-y-12">
             <div class="text-center max-w-2xl mx-auto space-y-3">
                 <span class="text-medical-accent font-bold uppercase tracking-widest text-xs bg-medical-900/60 px-3.5 py-1.5 rounded-full border border-medical-500/30">Facility Showcase</span>
-                <h2 class="text-3xl font-extrabold tracking-tight">Mesh Clinic Visual Tour</h2>
-                <p class="text-slate-300 text-sm">Explore our modern medical environment, advanced equipment, and specialized care rooms in Jijiga.</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Mesh Clinic Visual Tour</h2>
+                <p class="text-slate-300 text-sm sm:text-base">Explore our modern medical environment, advanced equipment, and specialized care rooms in Jijiga.</p>
             </div>
-            <!-- Responsive Grid: 2 columns on mobile, 3 columns on desktop with a clean balanced layout -->
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-                <div class="overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[4/3] bg-slate-800 group">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa-vGGEDAEotehSX7U1TerC1-BICch3fkDB9RW_z7iHw&s=10" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0284c7/ffffff?text=Mesh+Clinic+1';" alt="Mesh Clinic Facility 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[4/3] bg-slate-800 group">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTNHNBgib9_eysWDGRusauDiDYHRJXcFzBujf4K8l4dQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0d9488/ffffff?text=Mesh+Clinic+2';" alt="Mesh Clinic Facility 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[4/3] bg-slate-800 group">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFVZ7ZaYyjihDffZT_bQyPmnONBydvVTZx4LuxEbI08A&s=10" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0284c7/ffffff?text=Mesh+Clinic+3';" alt="Mesh Clinic Facility 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[4/3] bg-slate-800 group">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFP4AAMYrakteEXlKdCBZLEl6Y3FMwCLsg6GeG4xqM0Q&s=10" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0d9488/ffffff?text=Mesh+Clinic+4';" alt="Mesh Clinic Facility 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[4/3] bg-slate-800 group">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3J4rzbevXXMEgqhYBiOe_kyQiymd9IuHVqAzlZ-qpxQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0284c7/ffffff?text=Mesh+Clinic+5';" alt="Mesh Clinic Facility 5" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[4/3] bg-slate-800 group">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3izETIwbHzcPlmtjYNQiu4glPg39xFRK0jYYpY-H_uQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/600x450/0d9488/ffffff?text=Mesh+Clinic+6';" alt="Mesh Clinic Facility 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="col-span-2 md:col-span-3 overflow-hidden rounded-2xl shadow-lg border border-slate-700/50 aspect-[16/6] bg-slate-800 group">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThHgKtvmpCvxsYa3eRQ6Chfgn0Fj4cW43o8dvNihE4gQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/1200x450/0284c7/ffffff?text=Mesh+Clinic+Panorama';" alt="Mesh Clinic Facility 7" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Expanded Patient Trust / Testimonial Video Section (6 Videos Grid) -->
-    <section class="py-16 max-w-7xl mx-auto px-4 sm:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <span class="text-medical-primary font-bold uppercase tracking-widest text-xs bg-medical-50 px-3.5 py-1.5 rounded-full" data-i18n="patient_trust">Patient Trust</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900" data-i18n="testimonials_heading">What Our Patients Say</h2>
-            <p class="text-slate-600 text-sm sm:text-base" data-i18n="testimonials_sub">Real feedback from patients who received exceptional care at Mesh Clinic.</p>
-        </div>
-
-        <!-- 6 Testimonial Video Placeholders Grid (3 columns on desktop, 2 on tablet, 1 on mobile) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <!-- Video Card 1 -->
-            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group">
-                <div class="relative overflow-hidden aspect-video bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+1';" alt="Patient Testimonial 1 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
-                        <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
-                            <i class="fa-solid fa-play ml-0.5"></i>
-                        </button>
-                    </div>
-                    <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
-                        Patient Testimonial
-                    </div>
+            <!-- Photo Grid (2 columns on mobile, 3 columns on desktop) -->
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8">
+                <div class="overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-800 aspect-[4/3] sm:aspect-[16/11] bg-slate-900 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa-vGGEDAEotehSX7U1TerC1-BICch3fkDB9RW_z7iHw&s=10" onerror="this.onerror=null;this.src='https://placehold.co/800x550/0284c7/ffffff?text=Mesh+Clinic+1';" alt="Mesh Clinic Facility 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 1</h3>
-                    <p class="text-slate-600 text-sm italic leading-relaxed">
-                        "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
-                    </p>
-                    <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
-                        <div class="w-8 h-8 rounded-full bg-medical-100 text-medical-primary font-bold text-xs flex items-center justify-center">P1</div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
-                            <p class="text-[10px] text-slate-500">Jigjiga</p>
-                        </div>
-                    </div>
+                <div class="overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-800 aspect-[4/3] sm:aspect-[16/11] bg-slate-900 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTNHNBgib9_eysWDGRusauDiDYHRJXcFzBujf4K8l4dQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/800x550/0d9488/ffffff?text=Mesh+Clinic+2';" alt="Mesh Clinic Facility 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-800 aspect-[4/3] sm:aspect-[16/11] bg-slate-900 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFVZ7ZaYyjihDffZT_bQyPmnONBydvVTZx4LuxEbI08A&s=10" onerror="this.onerror=null;this.src='https://placehold.co/800x550/0284c7/ffffff?text=Mesh+Clinic+3';" alt="Mesh Clinic Facility 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-800 aspect-[4/3] sm:aspect-[16/11] bg-slate-900 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFP4AAMYrakteEXlKdCBZLEl6Y3FMwCLsg6GeG4xqM0Q&s=10" onerror="this.onerror=null;this.src='https://placehold.co/800x550/0d9488/ffffff?text=Mesh+Clinic+4';" alt="Mesh Clinic Facility 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-800 aspect-[4/3] sm:aspect-[16/11] bg-slate-900 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3J4rzbevXXMEgqhYBiOe_kyQiymd9IuHVqAzlZ-qpxQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/800x550/0284c7/ffffff?text=Mesh+Clinic+5';" alt="Mesh Clinic Facility 5" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-800 aspect-[4/3] sm:aspect-[16/11] bg-slate-900 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3izETIwbHzcPlmtjYNQiu4glPg39xFRK0jYYpY-H_uQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/800x550/0d9488/ffffff?text=Mesh+Clinic+6';" alt="Mesh Clinic Facility 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="col-span-2 lg:col-span-3 overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-800 aspect-[16/9] sm:aspect-[21/9] bg-slate-900 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThHgKtvmpCvxsYa3eRQ6Chfgn0Fj4cW43o8dvNihE4gQ&s=10" onerror="this.onerror=null;this.src='https://placehold.co/1400x600/0284c7/ffffff?text=Mesh+Clinic+Panorama';" alt="Mesh Clinic Facility 7" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 </div>
             </div>
-
-            <!-- Video Card 2 -->
-            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group">
-                <div class="relative overflow-hidden aspect-video bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+2';" alt="Patient Testimonial 2 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
-                        <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
-                            <i class="fa-solid fa-play ml-0.5"></i>
-                        </button>
-                    </div>
-                    <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
-                        Patient Testimonial
-                    </div>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 2</h3>
-                    <p class="text-slate-600 text-sm italic leading-relaxed">
-                        "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
-                    </p>
-                    <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
-                        <div class="w-8 h-8 rounded-full bg-teal-100 text-teal-700 font-bold text-xs flex items-center justify-center">P2</div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
-                            <p class="text-[10px] text-slate-500">Jigjiga</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Card 3 -->
-            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group">
-                <div class="relative overflow-hidden aspect-video bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+3';" alt="Patient Testimonial 3 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
-                        <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
-                            <i class="fa-solid fa-play ml-0.5"></i>
-                        </button>
-                    </div>
-                    <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
-                        Patient Testimonial
-                    </div>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 3</h3>
-                    <p class="text-slate-600 text-sm italic leading-relaxed">
-                        "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
-                    </p>
-                    <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
-                        <div class="w-8 h-8 rounded-full bg-sky-100 text-sky-700 font-bold text-xs flex items-center justify-center">P3</div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
-                            <p class="text-[10px] text-slate-500">Jigjiga</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Card 4 -->
-            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group">
-                <div class="relative overflow-hidden aspect-video bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+4';" alt="Patient Testimonial 4 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
-                        <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
-                            <i class="fa-solid fa-play ml-0.5"></i>
-                        </button>
-                    </div>
-                    <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
-                        Patient Testimonial
-                    </div>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 4</h3>
-                    <p class="text-slate-600 text-sm italic leading-relaxed">
-                        "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
-                    </p>
-                    <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
-                        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs flex items-center justify-center">P4</div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
-                            <p class="text-[10px] text-slate-500">Jigjiga</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Card 5 -->
-            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group">
-                <div class="relative overflow-hidden aspect-video bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+5';" alt="Patient Testimonial 5 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
-                        <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
-                            <i class="fa-solid fa-play ml-0.5"></i>
-                        </button>
-                    </div>
-                    <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
-                        Patient Testimonial
-                    </div>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 5</h3>
-                    <p class="text-slate-600 text-sm italic leading-relaxed">
-                        "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
-                    </p>
-                    <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
-                        <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 font-bold text-xs flex items-center justify-center">P5</div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
-                            <p class="text-[10px] text-slate-500">Jigjiga</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Card 6 -->
-            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group">
-                <div class="relative overflow-hidden aspect-video bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+6';" alt="Patient Testimonial 6 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
-                        <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
-                            <i class="fa-solid fa-play ml-0.5"></i>
-                        </button>
-                    </div>
-                    <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
-                        Patient Testimonial
-                    </div>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 6</h3>
-                    <p class="text-slate-600 text-sm italic leading-relaxed">
-                        "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
-                    </p>
-                    <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
-                        <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-bold text-xs flex items-center justify-center">P6</div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
-                            <p class="text-[10px] text-slate-500">Jigjiga</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <section id="story" class="py-16 bg-slate-900 text-white relative overflow-hidden">
+    <!-- Expanded Patient Trust / Testimonial Video Section -->
+    <section class="w-full bg-slate-50 py-16 lg:py-24 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-medical-primary font-bold uppercase tracking-widest text-xs bg-white px-3.5 py-1.5 rounded-full shadow-sm" data-i18n="patient_trust">Patient Trust</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900" data-i18n="testimonials_heading">What Our Patients Say</h2>
+                <p class="text-slate-600 text-sm sm:text-base" data-i18n="testimonials_sub">Real feedback from patients who received exceptional care at Mesh Clinic.</p>
+            </div>
+
+            <!-- 6 Testimonial Video Placeholders Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Video Card 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group">
+                    <div class="relative overflow-hidden aspect-video bg-slate-900">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+1';" alt="Patient Testimonial 1 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
+                            <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
+                                <i class="fa-solid fa-play ml-0.5"></i>
+                            </button>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
+                            Patient Testimonial
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 1</h3>
+                        <p class="text-slate-600 text-sm italic leading-relaxed" data-i18n="test_1">
+                            "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
+                        </p>
+                        <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
+                            <div class="w-8 h-8 rounded-full bg-medical-100 text-medical-primary font-bold text-xs flex items-center justify-center">P1</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
+                                <p class="text-[10px] text-slate-500" data-i18n="jigjiga_resident">Jigjiga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Card 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group">
+                    <div class="relative overflow-hidden aspect-video bg-slate-900">
+                        <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+2';" alt="Patient Testimonial 2 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
+                            <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
+                                <i class="fa-solid fa-play ml-0.5"></i>
+                            </button>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
+                            Patient Testimonial
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 2</h3>
+                        <p class="text-slate-600 text-sm italic leading-relaxed" data-i18n="test_2">
+                            "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
+                        </p>
+                        <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
+                            <div class="w-8 h-8 rounded-full bg-teal-100 text-teal-700 font-bold text-xs flex items-center justify-center">P2</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
+                                <p class="text-[10px] text-slate-500" data-i18n="local_patient">Jigjiga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Card 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group">
+                    <div class="relative overflow-hidden aspect-video bg-slate-900">
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+3';" alt="Patient Testimonial 3 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
+                            <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
+                                <i class="fa-solid fa-play ml-0.5"></i>
+                            </button>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
+                            Patient Testimonial
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 3</h3>
+                        <p class="text-slate-600 text-sm italic leading-relaxed" data-i18n="test_3">
+                            "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
+                        </p>
+                        <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
+                            <div class="w-8 h-8 rounded-full bg-sky-100 text-sky-700 font-bold text-xs flex items-center justify-center">P3</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
+                                <p class="text-[10px] text-slate-500" data-i18n="community_member">Jigjiga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Card 4 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group">
+                    <div class="relative overflow-hidden aspect-video bg-slate-900">
+                        <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+4';" alt="Patient Testimonial 4 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
+                            <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
+                                <i class="fa-solid fa-play ml-0.5"></i>
+                            </button>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
+                            Patient Testimonial
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 4</h3>
+                        <p class="text-slate-600 text-sm italic leading-relaxed" data-i18n="test_1">
+                            "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
+                        </p>
+                        <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
+                            <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs flex items-center justify-center">P4</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
+                                <p class="text-[10px] text-slate-500">Jigjiga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Card 5 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group">
+                    <div class="relative overflow-hidden aspect-video bg-slate-900">
+                        <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+5';" alt="Patient Testimonial 5 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
+                            <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
+                                <i class="fa-solid fa-play ml-0.5"></i>
+                            </button>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
+                            Patient Testimonial
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 5</h3>
+                        <p class="text-slate-600 text-sm italic leading-relaxed" data-i18n="test_2">
+                            "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
+                        </p>
+                        <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
+                            <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 font-bold text-xs flex items-center justify-center">P5</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
+                                <p class="text-[10px] text-slate-500">Jigjiga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Card 6 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group">
+                    <div class="relative overflow-hidden aspect-video bg-slate-900">
+                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+6';" alt="Patient Testimonial 6 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
+                            <button onclick="playVideoPlaceholder()" class="w-14 h-14 rounded-full bg-medical-primary text-white flex items-center justify-center text-xl shadow-xl hover:scale-110 transition transform duration-200">
+                                <i class="fa-solid fa-play ml-0.5"></i>
+                            </button>
+                        </div>
+                        <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white uppercase tracking-wider">
+                            Patient Testimonial
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <h3 class="font-bold text-slate-900 text-base">Patient Testimonial 6</h3>
+                        <p class="text-slate-600 text-sm italic leading-relaxed" data-i18n="test_3">
+                            "Deegaan nadiif ah, shaqaale edeb leh, iyo dhakhaatiir aqoon u leh shaqadooda. Mar walba waan ku talinayaa Mesh Clinic."
+                        </p>
+                        <div class="flex items-center space-x-3 pt-2 border-t border-slate-100">
+                            <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-bold text-xs flex items-center justify-center">P6</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-xs">Verified Patient</h4>
+                                <p class="text-[10px] text-slate-500">Jigjiga</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section id="story" class="w-full bg-slate-900 text-white py-16 lg:py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div class="lg:col-span-6 space-y-6">
                 <span class="text-medical-accent font-bold uppercase tracking-widest text-xs bg-medical-900/50 px-3.5 py-1.5 rounded-full border border-medical-500/30" data-i18n="our_story_badge">Our Story</span>
@@ -737,7 +873,8 @@
         </div>
     </section>
 
-    <footer id="contact" class="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-800">
+    <!-- Footer Section -->
+    <footer id="contact" class="w-full bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
             <!-- Brand Column -->
             <div class="space-y-6 lg:col-span-1">
@@ -1255,7 +1392,7 @@
                     if(btn === category) {
                         bEl.className = "px-4 py-2 rounded-xl text-xs font-bold bg-medical-primary text-white shadow-sm transition";
                     } else {
-                        bEl.className = "px-4 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition";
+                        bEl.className = "px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 transition";
                     }
                 }
             });
