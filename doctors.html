@@ -47,7 +47,37 @@
         <a href="medical_services.html" class="hover:text-blue-600 transition">Services</a>
         <a href="patient_info.html" class="hover:text-blue-600 transition">Patient Info</a>
         <a href="index.html#contact" class="hover:text-blue-600 transition">Contact</a>
-      </nav>
+      </nav>             
+      <!-- Mobile menu button -->
+            <div class="lg:hidden flex items-center space-x-2">
+                <button onclick="toggleLangDropdown()" class="bg-slate-100 text-slate-700 px-3 py-2 rounded-xl text-xs font-bold flex items-center space-x-1">
+                    <i class="fa-solid fa-globe text-medical-primary"></i>
+                    <span id="mobile-lang-label">EN</span>
+                </button>
+                <button id="mobile-menu-btn" class="text-slate-700 focus:outline-none text-xl p-2">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3">
+            <a href="index.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_home">Home</a>
+            <a href="doctors.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_doctors">Specialists</a>
+            <a href="medical_services.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_services">Services</a>
+            <a href="patient_info.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_patient_info">Patient Info</a>
+            <a href="index.html#contact" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_contact">Contact</a>
+            <div class="pt-2 flex flex-col space-y-2">
+                <div class="grid grid-cols-3 gap-2 pb-2">
+                    <button onclick="setLanguage('en'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">English</button>
+                    <button onclick="setLanguage('am'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">አማርኛ</button>
+                    <button onclick="setLanguage('so'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">Af-Somali</button>
+                </div>
+                <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full bg-medical-primary text-white font-semibold py-2.5 rounded-xl text-center shadow-md">
+                    <span data-i18n="book_btn">Book Appointment</span>
+                </button>
+            </div>
+        </div>
       <div class="flex items-center space-x-3">
         <button onclick="openBookingModal()" class="bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold px-4 py-2.5 rounded-xl shadow-lg hover:scale-105 transition text-sm flex items-center">
           <i class="fa-regular fa-calendar-check mr-2"></i> Book Appointment
