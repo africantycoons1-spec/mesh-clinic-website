@@ -103,13 +103,12 @@
             
             <!-- Desktop Navigation Links -->
             <nav class="hidden lg:flex items-center space-x-6 font-medium text-sm text-slate-600">
-                <a href="#home" class="text-medical-primary font-semibold transition hover:text-medical-primary" data-i18n="nav_home">Home</a>
-                <a href="#specialists" class="hover:text-medical-primary transition" data-i18n="nav_doctors">Specialists</a>
-                <a href="#services" class="hover:text-medical-primary transition" data-i18n="nav_services">Services</a>
-                <a href="#gallery" class="hover:text-medical-primary transition" data-i18n="nav_gallery">Gallery</a>
-                <a href="#story" class="hover:text-medical-primary transition" data-i18n="nav_story">Our Story</a>
-                <a href="#contact" class="hover:text-medical-primary transition" data-i18n="nav_contact">Contact</a>
-            </nav>
+    <a href="index.html" class="text-medical-primary font-semibold transition hover:text-medical-primary" data-i18n="nav_home">Home</a>
+    <a href="doctors.html" class="hover:text-medical-primary transition" data-i18n="nav_doctors">Specialists</a>
+    <a href="medical_services.html" class="hover:text-medical-primary transition" data-i18n="nav_services">Services</a>
+    <a href="patient_info.html" class="hover:text-medical-primary transition" data-i18n="nav_patient_info">Patient Info</a>
+    <a href="index.html#contact" class="hover:text-medical-primary transition" data-i18n="nav_contact">Contact</a>
+</nav>
 
             <div class="hidden sm:flex items-center space-x-3">
                 <!-- Language Selector Dropdown -->
@@ -144,24 +143,22 @@
 
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3">
-            <a href="#home" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_home">Home</a>
-            <a href="#specialists" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_doctors">Specialists</a>
-            <a href="#services" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_services">Services</a>
-            <a href="#gallery" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_gallery">Gallery</a>
-            <a href="#story" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_story">Our Story</a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_contact">Contact</a>
-            
-            <div class="pt-2 flex flex-col space-y-2">
-                <div class="grid grid-cols-3 gap-2 pb-2">
-                    <button onclick="setLanguage('en'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">English</button>
-                    <button onclick="setLanguage('am'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">አማርኛ</button>
-                    <button onclick="setLanguage('so'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">Af-Somali</button>
-                </div>
-                <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full bg-medical-primary text-white font-semibold py-2.5 rounded-xl text-center shadow-md">
-                    <span data-i18n="book_btn">Book Appointment</span>
-                </button>
-            </div>
+    <a href="index.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_home">Home</a>
+    <a href="doctors.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_doctors">Specialists</a>
+    <a href="medical_services.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_services">Services</a>
+    <a href="patient_info.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_patient_info">Patient Info</a>
+    <a href="index.html#contact" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_contact">Contact</a>
+    <div class="pt-2 flex flex-col space-y-2">
+        <div class="grid grid-cols-3 gap-2 pb-2">
+            <button onclick="setLanguage('en'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">English</button>
+            <button onclick="setLanguage('am'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">አማርኛ</button>
+            <button onclick="setLanguage('so'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">Af-Somali</button>
         </div>
+        <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full bg-medical-primary text-white font-semibold py-2.5 rounded-xl text-center shadow-md">
+            <span data-i18n="book_btn">Book Appointment</span>
+        </button>
+    </div>
+</div>
     </header>
 
     <section id="home" class="relative text-white py-16 sm:py-24 lg:py-36 overflow-hidden min-h-[580px] lg:min-h-[680px] flex items-center">
