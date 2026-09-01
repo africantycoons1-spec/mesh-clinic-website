@@ -1,282 +1,768 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Doctors & Specialists | Mesh Clinic Jijiga</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Doctors & Specialists | Mesh Clinic Jijiga</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            dark: '#0f172a',
+                            primary: '#0284c7',
+                            secondary: '#0ea5e9',
+                            accent: '#14b8a6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============ SCROLL REVEAL ANIMATIONS ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.85);
+            transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ============ TYPING TEXT CURSOR ============ */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: currentColor;
+            margin-left: 2px;
+            animation: cursorBlink 0.8s step-end infinite;
+        }
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* ============ BACK TO TOP BUTTON ============ */
+        #back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 999;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4);
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        #back-to-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(2, 132, 199, 0.5);
+        }
+
+        /* ============ FLOATING ACTION BUTTONS ============ */
+        .floating-actions {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 998;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .floating-actions a {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .floating-actions a:hover {
+            transform: scale(1.12) translateY(-3px);
+        }
+        .floating-actions .whatsapp {
+            background: #25D366;
+        }
+        .floating-actions .phone {
+            background: #0284c7;
+        }
+        .floating-actions .whatsapp:hover {
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+        .floating-actions .phone:hover {
+            box-shadow: 0 6px 25px rgba(2, 132, 199, 0.4);
+        }
+
+        /* ============ FADE PAGE TRANSITION ============ */
+        .page-transition {
+            animation: pageFadeIn 0.6s ease-out forwards;
+        }
+        @keyframes pageFadeIn {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============ STATS COUNTER ============ */
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0284c7;
+            display: inline-block;
+        }
+        .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        /* ============ DROPDOWN NAVIGATION ============ */
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        }
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0px);
+        }
+        .dropdown-item {
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .mobile-submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .mobile-submenu.open {
+            max-height: 500px;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased page-transition">
 
-  <!-- Top Bar -->
-  <div class="bg-slate-900 text-slate-300 text-xs py-2.5 px-4 sm:px-8 border-b border-slate-800">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div class="flex items-center space-x-6">
-        <span><i class="fa-solid fa-phone-volume text-emerald-400 mr-2 animate-pulse"></i> Emergency: <strong class="text-white ml-1">0915737157</strong></span>
-        <span class="hidden md:flex items-center">
-          <i class="fa-solid fa-location-dot text-emerald-400 mr-2"></i>
-          <a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-slate-300 hover:text-white underline">Jigjiga Map (9Q2X+7V2)</a>
-        </span>
-      </div>
-      <div class="flex items-center space-x-4">
-        <span><i class="fa-regular fa-clock text-emerald-400 mr-2"></i> Open 24/7</span>
-        <a href="https://wa.me/251915737157" target="_blank" class="hover:text-emerald-400 flex items-center space-x-1 bg-emerald-600/30 px-2.5 py-1 rounded-md"><i class="fa-brands fa-whatsapp text-emerald-400"></i> <span>WhatsApp</span></a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <a href="index.html" class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-teal-500 flex items-center justify-center text-white font-bold text-xl shadow-md">
-            <i class="fa-solid fa-house-medical"></i>
-          </div>
-          <div>
-            <span class="text-2xl font-extrabold tracking-tight text-slate-900">Mesh <span class="text-blue-600">Clinic</span></span>
-            <span class="block text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Private Medical Center</span>
-          </div>
-        </a>
-      </div>
-      <nav class="hidden lg:flex items-center space-x-6 font-medium text-sm text-slate-600">
-        <a href="index.html" class="hover:text-blue-600 transition">Home</a>
-        <a href="doctors.html" class="text-blue-600 font-semibold">Specialists</a>
-        <a href="medical_services.html" class="hover:text-blue-600 transition">Services</a>
-        <a href="patient_info.html" class="hover:text-blue-600 transition">Patient Info</a>
-        <a href="index.html#contact" class="hover:text-blue-600 transition">Contact</a>
-      </nav>             
-      <!-- Mobile menu button -->
-            <div class="lg:hidden flex items-center space-x-2">
-                <button onclick="toggleLangDropdown()" class="bg-slate-100 text-slate-700 px-3 py-2 rounded-xl text-xs font-bold flex items-center space-x-1">
-                    <i class="fa-solid fa-globe text-medical-primary"></i>
-                    <span id="mobile-lang-label">EN</span>
-                </button>
-                <button id="mobile-menu-btn" class="text-slate-700 focus:outline-none text-xl p-2">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
+    <!-- Top Bar -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-2.5 px-4 sm:px-8 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-6">
+                <span><i class="fa-solid fa-phone-volume text-emerald-400 mr-2 animate-pulse"></i> Emergency: <strong class="text-white ml-1">0915737157</strong></span>
+                <span class="hidden md:flex items-center">
+                    <i class="fa-solid fa-location-dot text-emerald-400 mr-2"></i>
+                    <a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-slate-300 hover:text-white underline">Jigjiga Map (9Q2X+7V2)</a>
+                </span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span><i class="fa-regular fa-clock text-emerald-400 mr-2"></i> Open 24/7</span>
+                <a href="https://wa.me/251915737157" target="_blank" class="hover:text-emerald-400 flex items-center space-x-1 bg-emerald-600/30 px-2.5 py-1 rounded-md"><i class="fa-brands fa-whatsapp text-emerald-400"></i> <span>WhatsApp</span></a>
             </div>
         </div>
+    </div>
 
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3">
-            <a href="index.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_home">Home</a>
-            <a href="doctors.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_doctors">Specialists</a>
-            <a href="medical_services.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_services">Services</a>
-            <a href="patient_info.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_patient_info">Patient Info</a>
-            <a href="index.html#contact" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_contact">Contact</a>
-            <div class="pt-2 flex flex-col space-y-2">
-                <div class="grid grid-cols-3 gap-2 pb-2">
-                    <button onclick="setLanguage('en'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">English</button>
-                    <button onclick="setLanguage('am'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">አማርኛ</button>
-                    <button onclick="setLanguage('so'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">Af-Somali</button>
+    <!-- Header with Dropdown Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-teal-500 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                        <i class="fa-solid fa-house-medical"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-extrabold tracking-tight text-slate-900">Mesh <span class="text-blue-600">Clinic</span></span>
+                        <span class="block text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Private Medical Center</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation with Dropdowns -->
+            <nav class="hidden lg:flex items-center space-x-6 font-medium text-sm text-slate-600">
+                <!-- Home -->
+                <a href="index.html" class="hover:text-blue-600 transition">Home</a>
+
+                <!-- Specialists Dropdown -->
+                <div class="relative group">
+                    <a href="doctors.html" class="text-blue-600 font-semibold flex items-center gap-1">
+                        Specialists <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                    </a>
+                    <div class="dropdown-menu absolute left-0 top-full pt-2 w-52 z-50">
+                        <div class="bg-white rounded-xl shadow-xl border border-slate-100 py-2">
+                            <a href="doctors.html" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">All Specialists</a>
+                            <a href="doctors.html#general" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">General Practice</a>
+                            <a href="doctors.html#internal" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">Internal Medicine</a>
+                            <a href="doctors.html#pediatrics" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">Pediatrics</a>
+                            <a href="doctors.html#surgery" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">Surgery & Orthopedics</a>
+                        </div>
+                    </div>
                 </div>
-                <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full bg-medical-primary text-white font-semibold py-2.5 rounded-xl text-center shadow-md">
-                    <span data-i18n="book_btn">Book Appointment</span>
+
+                <!-- Services Dropdown -->
+                <div class="relative group">
+                    <a href="medical_services.html" class="hover:text-blue-600 transition flex items-center gap-1">
+                        Services <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                    </a>
+                    <div class="dropdown-menu absolute left-0 top-full pt-2 w-56 z-50">
+                        <div class="bg-white rounded-xl shadow-xl border border-slate-100 py-2">
+                            <a href="medical_services.html#general-medicine" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">General Medicine</a>
+                            <a href="medical_services.html#diagnostics" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">Diagnostics & Lab</a>
+                            <a href="medical_services.html#pediatrics" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">Pediatrics</a>
+                            <a href="medical_services.html#pharmacy" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">Pharmacy</a>
+                            <a href="medical_services.html#icu" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">ICU Services</a>
+                            <a href="medical_services.html#emergency" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">Emergency Care</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patient Info Dropdown -->
+                <div class="relative group">
+                    <a href="patient_info.html" class="hover:text-blue-600 transition flex items-center gap-1">
+                        Patient Info <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                    </a>
+                    <div class="dropdown-menu absolute left-0 top-full pt-2 w-52 z-50">
+                        <div class="bg-white rounded-xl shadow-xl border border-slate-100 py-2">
+                            <a href="patient_info.html#before-visit" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">Before Your Visit</a>
+                            <a href="patient_info.html#payment" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">Insurance & Payment</a>
+                            <a href="patient_info.html#faq" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">FAQs</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <a href="index.html#contact" class="hover:text-blue-600 transition">Contact</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <button onclick="openBookingModal()" class="bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold px-4 py-2.5 rounded-xl shadow-lg hover:scale-105 transition text-sm flex items-center">
+                    <i class="fa-regular fa-calendar-check mr-2"></i> Book Appointment
+                </button>
+                <!-- Mobile menu button -->
+                <div class="lg:hidden flex items-center space-x-2">
+                    <button id="mobile-menu-btn" class="text-slate-700 focus:outline-none text-xl p-2">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown with Accordion Submenus -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-2">
+            <a href="index.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1">Home</a>
+
+            <!-- Specialists Mobile -->
+            <div class="mobile-accordion">
+                <button onclick="toggleMobileSubmenu(this)" class="flex items-center justify-between w-full text-slate-700 font-medium py-1 text-left">
+                    <span>Specialists</span>
+                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                </button>
+                <div class="mobile-submenu pl-4 space-y-1">
+                    <a href="doctors.html" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">All Specialists</a>
+                    <a href="doctors.html#general" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">General Practice</a>
+                    <a href="doctors.html#internal" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">Internal Medicine</a>
+                    <a href="doctors.html#pediatrics" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">Pediatrics</a>
+                    <a href="doctors.html#surgery" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">Surgery & Orthopedics</a>
+                </div>
+            </div>
+
+            <!-- Services Mobile -->
+            <div class="mobile-accordion">
+                <button onclick="toggleMobileSubmenu(this)" class="flex items-center justify-between w-full text-slate-700 font-medium py-1 text-left">
+                    <span>Services</span>
+                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                </button>
+                <div class="mobile-submenu pl-4 space-y-1">
+                    <a href="medical_services.html#general-medicine" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">General Medicine</a>
+                    <a href="medical_services.html#diagnostics" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">Diagnostics & Lab</a>
+                    <a href="medical_services.html#pediatrics" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">Pediatrics</a>
+                    <a href="medical_services.html#pharmacy" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">Pharmacy</a>
+                    <a href="medical_services.html#icu" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">ICU Services</a>
+                    <a href="medical_services.html#emergency" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">Emergency Care</a>
+                </div>
+            </div>
+
+            <!-- Patient Info Mobile -->
+            <div class="mobile-accordion">
+                <button onclick="toggleMobileSubmenu(this)" class="flex items-center justify-between w-full text-slate-700 font-medium py-1 text-left">
+                    <span>Patient Info</span>
+                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                </button>
+                <div class="mobile-submenu pl-4 space-y-1">
+                    <a href="patient_info.html#before-visit" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">Before Your Visit</a>
+                    <a href="patient_info.html#payment" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">Insurance & Payment</a>
+                    <a href="patient_info.html#faq" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-blue-600">FAQs</a>
+                </div>
+            </div>
+
+            <a href="index.html#contact" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1">Contact</a>
+
+            <div class="pt-2 flex flex-col space-y-2 border-t border-slate-200 mt-2">
+                <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full bg-blue-600 text-white font-semibold py-2.5 rounded-xl text-center shadow-md">
+                    Book Appointment
                 </button>
             </div>
         </div>
-      <div class="flex items-center space-x-3">
-        <button onclick="openBookingModal()" class="bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold px-4 py-2.5 rounded-xl shadow-lg hover:scale-105 transition text-sm flex items-center">
-          <i class="fa-regular fa-calendar-check mr-2"></i> Book Appointment
-        </button>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Page Title -->
-  <section class="bg-slate-900 text-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8">
-      <div class="max-w-3xl space-y-4">
-        <div class="inline-flex items-center space-x-2 bg-white/10 px-3.5 py-1 rounded-full text-xs font-semibold text-sky-300">
-          <i class="fa-solid fa-user-doctor mr-1"></i> Expert Medical Practitioners
-        </div>
-        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Our Dedicated Specialists</h1>
-        <p class="text-slate-300 text-base">Meet our experienced physicians and medical specialists dedicated to providing trusted healthcare with a personal touch at Mesh Clinic.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Doctors Grid -->
-  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-      <!-- Doctor 1 -->
-      <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col">
-        <div>
-          <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-            <img src="https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Ahmed" alt="Dr. Ahmed Omar" class="w-full h-full object-cover">
-          </div>
-          <div class="p-6 space-y-2">
-            <span class="text-xs text-blue-600 font-bold uppercase tracking-wider block">General Practitioner</span>
-            <h3 class="font-extrabold text-slate-900 text-lg">Dr. Ahmed Omar</h3>
-            <p class="text-xs text-slate-500">MD · Primary Care & Health Evaluations</p>
-            <div class="pt-2 text-xs text-slate-600 space-y-1">
-              <div><strong class="text-slate-700">Languages:</strong> English, Somali, Amharic</div>
-              <div><strong class="text-slate-700">Experience:</strong> 8+ Years</div>
+    <!-- Page Title with Typing Effect -->
+    <section class="bg-slate-900 text-white py-16 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="max-w-3xl space-y-4">
+                <div class="inline-flex items-center space-x-2 bg-white/10 px-3.5 py-1 rounded-full text-xs font-semibold text-sky-300">
+                    <i class="fa-solid fa-user-doctor mr-1"></i> Expert Medical Practitioners
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight typing-effect" data-text="Our Dedicated Specialists">
+                    <!-- Typing effect replaces this -->
+                </h1>
+                <p class="text-slate-300 text-base reveal">Meet our experienced physicians and medical specialists dedicated to providing trusted healthcare with a personal touch at Mesh Clinic.</p>
             </div>
-          </div>
         </div>
-        <div class="p-6 pt-0">
-          <button onclick="openBookingModal()" class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-3 rounded-xl text-sm transition">
-            Book Appointment
-          </button>
-        </div>
-      </div>
+    </section>
 
-      <!-- Doctor 2 -->
-      <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col">
-        <div>
-          <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-            <img src="https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Fatima" alt="Dr. Fatima Hassan" class="w-full h-full object-cover">
-          </div>
-          <div class="p-6 space-y-2">
-            <span class="text-xs text-blue-600 font-bold uppercase tracking-wider block">Internal Medicine</span>
-            <h3 class="font-extrabold text-slate-900 text-lg">Dr. Fatima Hassan</h3>
-            <p class="text-xs text-slate-500">Consultant Physician · Chronic Care</p>
-            <div class="pt-2 text-xs text-slate-600 space-y-1">
-              <div><strong class="text-slate-700">Languages:</strong> English, Somali</div>
-              <div><strong class="text-slate-700">Experience:</strong> 10+ Years</div>
+    <!-- Stats Section -->
+    <section class="stats-section py-12 bg-white border-b border-slate-200 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="5000">0</span>
+                    <span class="stat-label">Happy Patients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="25">0</span>
+                    <span class="stat-label">Expert Doctors</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="15">0</span>
+                    <span class="stat-label">Years of Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="100">0</span>
+                    <span class="stat-label">% Patient Satisfaction</span>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="p-6 pt-0">
-          <button onclick="openBookingModal()" class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-3 rounded-xl text-sm transition">
-            Book Appointment
-          </button>
-        </div>
-      </div>
+    </section>
 
-      <!-- Doctor 3 -->
-      <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col">
-        <div>
-          <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-            <img src="https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Ibrahim" alt="Dr. Ibrahim Yusuf" class="w-full h-full object-cover">
-          </div>
-          <div class="p-6 space-y-2">
-            <span class="text-xs text-blue-600 font-bold uppercase tracking-wider block">Pediatrics</span>
-            <h3 class="font-extrabold text-slate-900 text-lg">Dr. Ibrahim Yusuf</h3>
-            <p class="text-xs text-slate-500">Child Health & Immunization Specialist</p>
-            <div class="pt-2 text-xs text-slate-600 space-y-1">
-              <div><strong class="text-slate-700">Languages:</strong> English, Amharic, Somali</div>
-              <div><strong class="text-slate-700">Experience:</strong> 7+ Years</div>
+    <!-- Doctors Grid -->
+    <section id="doctors-grid" class="py-16 max-w-7xl mx-auto px-4 sm:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            <!-- Doctor 1 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col reveal" data-category="general">
+                <div>
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Ahmed" alt="Dr. Ahmed Omar" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <span class="text-xs text-blue-600 font-bold uppercase tracking-wider block">General Practitioner</span>
+                        <h3 class="font-extrabold text-slate-900 text-lg">Dr. Ahmed Omar</h3>
+                        <p class="text-xs text-slate-500">MD · Primary Care & Health Evaluations</p>
+                        <div class="pt-2 text-xs text-slate-600 space-y-1">
+                            <div><strong class="text-slate-700">Languages:</strong> English, Somali, Amharic</div>
+                            <div><strong class="text-slate-700">Experience:</strong> 8+ Years</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openBookingModal()" class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-3 rounded-xl text-sm transition">
+                        Book Appointment
+                    </button>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="p-6 pt-0">
-          <button onclick="openBookingModal()" class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-3 rounded-xl text-sm transition">
-            Book Appointment
-          </button>
-        </div>
-      </div>
 
-      <!-- Doctor 4 -->
-      <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col">
-        <div>
-          <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
-            <img src="https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Samira" alt="Dr. Samira Abdi" class="w-full h-full object-cover">
-          </div>
-          <div class="p-6 space-y-2">
-            <span class="text-xs text-blue-600 font-bold uppercase tracking-wider block">Surgery & Orthopedics</span>
-            <h3 class="font-extrabold text-slate-900 text-lg">Dr. Samira Abdi</h3>
-            <p class="text-xs text-slate-500">Surgical Specialist · Trauma Care</p>
-            <div class="pt-2 text-xs text-slate-600 space-y-1">
-              <div><strong class="text-slate-700">Languages:</strong> English, Somali</div>
-              <div><strong class="text-slate-700">Experience:</strong> 12+ Years</div>
+            <!-- Doctor 2 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col reveal" data-category="internal">
+                <div>
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Fatima" alt="Dr. Fatima Hassan" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <span class="text-xs text-blue-600 font-bold uppercase tracking-wider block">Internal Medicine</span>
+                        <h3 class="font-extrabold text-slate-900 text-lg">Dr. Fatima Hassan</h3>
+                        <p class="text-xs text-slate-500">Consultant Physician · Chronic Care</p>
+                        <div class="pt-2 text-xs text-slate-600 space-y-1">
+                            <div><strong class="text-slate-700">Languages:</strong> English, Somali</div>
+                            <div><strong class="text-slate-700">Experience:</strong> 10+ Years</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openBookingModal()" class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-3 rounded-xl text-sm transition">
+                        Book Appointment
+                    </button>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="p-6 pt-0">
-          <button onclick="openBookingModal()" class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-3 rounded-xl text-sm transition">
-            Book Appointment
-          </button>
-        </div>
-      </div>
 
+            <!-- Doctor 3 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col reveal" data-category="pediatrics">
+                <div>
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://placehold.co/400x500/0284c7/ffffff?text=Dr.+Ibrahim" alt="Dr. Ibrahim Yusuf" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <span class="text-xs text-blue-600 font-bold uppercase tracking-wider block">Pediatrics</span>
+                        <h3 class="font-extrabold text-slate-900 text-lg">Dr. Ibrahim Yusuf</h3>
+                        <p class="text-xs text-slate-500">Child Health & Immunization Specialist</p>
+                        <div class="pt-2 text-xs text-slate-600 space-y-1">
+                            <div><strong class="text-slate-700">Languages:</strong> English, Amharic, Somali</div>
+                            <div><strong class="text-slate-700">Experience:</strong> 7+ Years</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openBookingModal()" class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-3 rounded-xl text-sm transition">
+                        Book Appointment
+                    </button>
+                </div>
+            </div>
+
+            <!-- Doctor 4 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col reveal" data-category="surgery">
+                <div>
+                    <div class="relative overflow-hidden aspect-[4/5] bg-slate-100">
+                        <img src="https://placehold.co/400x500/0d9488/ffffff?text=Dr.+Samira" alt="Dr. Samira Abdi" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <span class="text-xs text-blue-600 font-bold uppercase tracking-wider block">Surgery & Orthopedics</span>
+                        <h3 class="font-extrabold text-slate-900 text-lg">Dr. Samira Abdi</h3>
+                        <p class="text-xs text-slate-500">Surgical Specialist · Trauma Care</p>
+                        <div class="pt-2 text-xs text-slate-600 space-y-1">
+                            <div><strong class="text-slate-700">Languages:</strong> English, Somali</div>
+                            <div><strong class="text-slate-700">Experience:</strong> 12+ Years</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openBookingModal()" class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-3 rounded-xl text-sm transition">
+                        Book Appointment
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-800 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <span class="text-2xl font-extrabold text-white">Mesh <span class="text-blue-500">Clinic</span></span>
+                    <p class="text-sm mt-4 text-slate-400">Private Medical Center located at 9Q2X+7V2, Jijiga. Providing expert care with a personal touch.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white">Home</a></li>
+                        <li><a href="doctors.html" class="hover:text-white">Specialists</a></li>
+                        <li><a href="medical_services.html" class="hover:text-white">Services</a></li>
+                        <li><a href="patient_info.html" class="hover:text-white">Patient Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>Phone/WhatsApp: <strong class="text-white">0915737157</strong></li>
+                        <li>Location: <a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-blue-400 underline">9Q2X+7V2, Jijiga Map</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-900 text-center text-xs text-slate-500">
+                &copy; 2026 Mesh Clinic (Jigjiga). All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-actions" id="floating-actions">
+        <a href="https://wa.me/251915737157" target="_blank" class="whatsapp" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:0915737157" class="phone" aria-label="Call us">
+            <i class="fa-solid fa-phone"></i>
+        </a>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-        <div>
-          <span class="text-2xl font-extrabold text-white">Mesh <span class="text-blue-500">Clinic</span></span>
-          <p class="text-sm mt-4 text-slate-400">Private Medical Center located at 9Q2X+7V2, Jijiga. Providing expert care with a personal touch.</p>
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative animate-fade-in">
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-xl font-extrabold text-slate-900 mb-2">Book Doctor Consultation</h3>
+            <p class="text-xs text-slate-500 mb-6">Secure your specialist appointment at Mesh Clinic, Jijiga.</p>
+            <form onsubmit="handleModalSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Full Name</label>
+                    <input type="text" required placeholder="Enter your full name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Phone Number</label>
+                        <input type="tel" required value="0915737157" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Preferred Doctor</label>
+                        <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600">
+                            <option>Dr. Ahmed Omar - General Practitioner</option>
+                            <option>Dr. Fatima Hassan - Internal Medicine</option>
+                            <option>Dr. Ibrahim Yusuf - Pediatrics</option>
+                            <option>Dr. Samira Abdi - Surgery</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg hover:opacity-95 transition text-sm">
+                    Confirm Booking Request
+                </button>
+            </form>
         </div>
-        <div>
-          <h4 class="text-white font-bold mb-4">Quick Links</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="index.html" class="hover:text-white">Home</a></li>
-            <li><a href="doctors.html" class="hover:text-white">Specialists</a></li>
-            <li><a href="medical_services.html" class="hover:text-white">Services</a></li>
-            <li><a href="patient_info.html" class="hover:text-white">Patient Info</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-white font-bold mb-4">Contact Info</h4>
-          <ul class="space-y-2 text-sm">
-            <li>Phone/WhatsApp: <strong class="text-white">0915737157</strong></li>
-            <li>Location: <a href="https://maps.google.com/?q=9Q2X+7V2,+Jijiga" target="_blank" class="text-blue-400 underline">9Q2X+7V2, Jijiga Map</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="pt-8 border-t border-slate-900 text-center text-xs text-slate-500">
-        &copy; 2026 Mesh Clinic (Jigjiga). All rights reserved.
-      </div>
     </div>
-  </footer>
 
-  <!-- Booking Modal -->
-  <div id="booking-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative">
-      <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 text-xl">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <h3 class="text-xl font-extrabold text-slate-900 mb-2">Book Doctor Consultation</h3>
-      <p class="text-xs text-slate-500 mb-6">Secure your specialist appointment at Mesh Clinic, Jijiga.</p>
-      <form onsubmit="handleModalSubmit(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Full Name</label>
-          <input type="text" required placeholder="Enter your full name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600">
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Phone Number</label>
-            <input type="tel" required value="0915737157" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600">
-          </div>
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Preferred Doctor</label>
-            <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600">
-              <option>Dr. Ahmed Omar - General Practitioner</option>
-              <option>Dr. Fatima Hassan - Internal Medicine</option>
-              <option>Dr. Ibrahim Yusuf - Pediatrics</option>
-              <option>Dr. Samira Abdi - Surgery</option>
-            </select>
-          </div>
-        </div>
-        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg hover:opacity-95 transition text-sm">
-          Confirm Booking Request
-        </button>
-      </form>
-    </div>
-  </div>
+    <style>
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 
-  <script>
-    function openBookingModal() {
-      document.getElementById('booking-modal').classList.remove('hidden');
-    }
-    function closeBookingModal() {
-      document.getElementById('booking-modal').classList.add('hidden');
-    }
-    function handleModalSubmit(e) {
-      e.preventDefault();
-      closeBookingModal();
-      alert("Specialist appointment requested! We will call 0915737157 shortly.");
-    }
-  </script>
+    <script>
+        function openBookingModal() {
+            document.getElementById('booking-modal').classList.remove('hidden');
+        }
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+        function handleModalSubmit(e) {
+            e.preventDefault();
+            closeBookingModal();
+            alert("Specialist appointment requested! We will call 0915737157 shortly.");
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // Mobile accordion submenu toggle
+        function toggleMobileSubmenu(btn) {
+            const parent = btn.closest('.mobile-accordion');
+            if (!parent) return;
+            const submenu = parent.querySelector('.mobile-submenu');
+            const chevron = btn.querySelector('.fa-chevron-down');
+            if (submenu) {
+                submenu.classList.toggle('open');
+                if (chevron) {
+                    chevron.style.transform = submenu.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+                }
+            }
+        }
+
+        // ============================================================
+        // 1. TYPING TEXT EFFECT
+        // ============================================================
+        function typeText(element, text, speed = 60) {
+            if (!element) return;
+            let i = 0;
+            element.textContent = '';
+            const cursor = document.createElement('span');
+            cursor.className = 'typing-cursor';
+            element.appendChild(cursor);
+
+            function type() {
+                if (i < text.length) {
+                    const char = text.charAt(i);
+                    const textNode = document.createTextNode(char);
+                    element.insertBefore(textNode, cursor);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    cursor.style.display = 'none';
+                }
+            }
+            type();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const typingElements = document.querySelectorAll('.typing-effect');
+            typingElements.forEach(el => {
+                const text = el.getAttribute('data-text') || el.textContent.trim();
+                el.textContent = '';
+                typeText(el, text, 50);
+            });
+        });
+
+        // ============================================================
+        // 2. SCROLL REVEAL ANIMATIONS
+        // ============================================================
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            reveals.forEach(el => revealObserver.observe(el));
+        }
+
+        // ============================================================
+        // 3. STATS COUNTER
+        // ============================================================
+        function initStatsCounter() {
+            const stats = document.querySelectorAll('.stat-number');
+            let statsAnimated = false;
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !statsAnimated) {
+                        statsAnimated = true;
+                        stats.forEach(stat => {
+                            const target = parseInt(stat.getAttribute('data-target'));
+                            if (isNaN(target)) return;
+                            let current = 0;
+                            const increment = Math.ceil(target / 60);
+                            const timer = setInterval(() => {
+                                current += increment;
+                                if (current >= target) {
+                                    current = target;
+                                    clearInterval(timer);
+                                }
+                                stat.textContent = current + (target > 100 ? '+' : '');
+                            }, 30);
+                        });
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection) statsObserver.observe(statsSection);
+        }
+
+        // ============================================================
+        // 4. BACK TO TOP BUTTON
+        // ============================================================
+        function initBackToTop() {
+            const backBtn = document.getElementById('back-to-top');
+            if (!backBtn) return;
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 400) {
+                    backBtn.classList.add('visible');
+                } else {
+                    backBtn.classList.remove('visible');
+                }
+            });
+            backBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // ============================================================
+        // 5. FLOATING ACTIONS
+        // ============================================================
+        function initFloatingActions() {
+            const actions = document.getElementById('floating-actions');
+            if (!actions) return;
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    actions.style.opacity = '0.7';
+                    actions.style.transform = 'scale(0.95)';
+                } else {
+                    actions.style.opacity = '1';
+                    actions.style.transform = 'scale(1)';
+                }
+            });
+        }
+
+        // ============================================================
+        // 6. INITIALIZE ALL EFFECTS
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollReveal();
+            initStatsCounter();
+            initBackToTop();
+            initFloatingActions();
+        });
+    </script>
 
 </body>
 </html>
