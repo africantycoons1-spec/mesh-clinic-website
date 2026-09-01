@@ -215,6 +215,31 @@
             font-weight: 500;
             margin-top: 4px;
         }
+
+        /* ============ DROPDOWN NAVIGATION ============ */
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+        }
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0px);
+        }
+        .dropdown-item {
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        /* Mobile submenu toggle */
+        .mobile-submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .mobile-submenu.open {
+            max-height: 500px;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden page-transition">
@@ -249,14 +274,61 @@
                 </div>
             </div>
             
-            <!-- Desktop Navigation Links -->
+            <!-- Desktop Navigation Links with Dropdowns -->
             <nav class="hidden lg:flex items-center space-x-6 font-medium text-sm text-slate-600">
-    <a href="index.html" class="text-medical-primary font-semibold transition hover:text-medical-primary" data-i18n="nav_home">Home</a>
-    <a href="doctors.html" class="hover:text-medical-primary transition" data-i18n="nav_doctors">Specialists</a>
-    <a href="medical_services.html" class="hover:text-medical-primary transition" data-i18n="nav_services">Services</a>
-    <a href="patient_info.html" class="hover:text-medical-primary transition" data-i18n="nav_patient_info">Patient Info</a>
-    <a href="index.html#contact" class="hover:text-medical-primary transition" data-i18n="nav_contact">Contact</a>
-</nav>
+                <!-- Home -->
+                <a href="index.html" class="text-medical-primary font-semibold transition hover:text-medical-primary" data-i18n="nav_home">Home</a>
+                
+                <!-- Specialists Dropdown -->
+                <div class="relative group">
+                    <a href="doctors.html" class="hover:text-medical-primary transition flex items-center gap-1" data-i18n="nav_doctors">
+                        Specialists <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                    </a>
+                    <div class="dropdown-menu absolute left-0 top-full pt-2 w-52 z-50">
+                        <div class="bg-white rounded-xl shadow-xl border border-slate-100 py-2">
+                            <a href="doctors.html" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">All Specialists</a>
+                            <a href="doctors.html#general" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">General Practice</a>
+                            <a href="doctors.html#internal" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">Internal Medicine</a>
+                            <a href="doctors.html#pediatrics" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">Pediatrics</a>
+                            <a href="doctors.html#surgery" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">Surgery & Orthopedics</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Dropdown -->
+                <div class="relative group">
+                    <a href="medical_services.html" class="hover:text-medical-primary transition flex items-center gap-1" data-i18n="nav_services">
+                        Services <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                    </a>
+                    <div class="dropdown-menu absolute left-0 top-full pt-2 w-56 z-50">
+                        <div class="bg-white rounded-xl shadow-xl border border-slate-100 py-2">
+                            <a href="medical_services.html#general-medicine" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">General Medicine</a>
+                            <a href="medical_services.html#diagnostics" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">Diagnostics & Lab</a>
+                            <a href="medical_services.html#pediatrics" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">Pediatrics</a>
+                            <a href="medical_services.html#pharmacy" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">Pharmacy</a>
+                            <a href="medical_services.html#icu" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">ICU Services</a>
+                            <a href="medical_services.html#emergency" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">Emergency Care</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patient Info Dropdown -->
+                <div class="relative group">
+                    <a href="patient_info.html" class="hover:text-medical-primary transition flex items-center gap-1" data-i18n="nav_patient_info">
+                        Patient Info <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                    </a>
+                    <div class="dropdown-menu absolute left-0 top-full pt-2 w-52 z-50">
+                        <div class="bg-white rounded-xl shadow-xl border border-slate-100 py-2">
+                            <a href="patient_info.html#before-visit" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">Before Your Visit</a>
+                            <a href="patient_info.html#payment" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">Insurance & Payment</a>
+                            <a href="patient_info.html#faq" class="dropdown-item block px-4 py-2 text-sm text-slate-700 hover:bg-medical-50 hover:text-medical-primary">FAQs</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <a href="index.html#contact" class="hover:text-medical-primary transition" data-i18n="nav_contact">Contact</a>
+            </nav>
 
             <div class="hidden sm:flex items-center space-x-3">
                 <!-- Language Selector Dropdown -->
@@ -289,24 +361,67 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3">
-    <a href="index.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_home">Home</a>
-    <a href="doctors.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_doctors">Specialists</a>
-    <a href="medical_services.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_services">Services</a>
-    <a href="patient_info.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_patient_info">Patient Info</a>
-    <a href="index.html#contact" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_contact">Contact</a>
-    <div class="pt-2 flex flex-col space-y-2">
-        <div class="grid grid-cols-3 gap-2 pb-2">
-            <button onclick="setLanguage('en'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">English</button>
-            <button onclick="setLanguage('am'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">አማርኛ</button>
-            <button onclick="setLanguage('so'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">Af-Somali</button>
+        <!-- Mobile Menu Dropdown (with nested accordion submenus) -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-2">
+            <a href="index.html" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_home">Home</a>
+            
+            <!-- Specialists Mobile -->
+            <div class="mobile-accordion">
+                <button onclick="toggleMobileSubmenu(this)" class="flex items-center justify-between w-full text-slate-700 font-medium py-1 text-left">
+                    <span data-i18n="nav_doctors">Specialists</span>
+                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                </button>
+                <div class="mobile-submenu pl-4 space-y-1">
+                    <a href="doctors.html" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">All Specialists</a>
+                    <a href="doctors.html#general" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">General Practice</a>
+                    <a href="doctors.html#internal" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">Internal Medicine</a>
+                    <a href="doctors.html#pediatrics" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">Pediatrics</a>
+                    <a href="doctors.html#surgery" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">Surgery & Orthopedics</a>
+                </div>
+            </div>
+
+            <!-- Services Mobile -->
+            <div class="mobile-accordion">
+                <button onclick="toggleMobileSubmenu(this)" class="flex items-center justify-between w-full text-slate-700 font-medium py-1 text-left">
+                    <span data-i18n="nav_services">Services</span>
+                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                </button>
+                <div class="mobile-submenu pl-4 space-y-1">
+                    <a href="medical_services.html#general-medicine" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">General Medicine</a>
+                    <a href="medical_services.html#diagnostics" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">Diagnostics & Lab</a>
+                    <a href="medical_services.html#pediatrics" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">Pediatrics</a>
+                    <a href="medical_services.html#pharmacy" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">Pharmacy</a>
+                    <a href="medical_services.html#icu" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">ICU Services</a>
+                    <a href="medical_services.html#emergency" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">Emergency Care</a>
+                </div>
+            </div>
+
+            <!-- Patient Info Mobile -->
+            <div class="mobile-accordion">
+                <button onclick="toggleMobileSubmenu(this)" class="flex items-center justify-between w-full text-slate-700 font-medium py-1 text-left">
+                    <span data-i18n="nav_patient_info">Patient Info</span>
+                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                </button>
+                <div class="mobile-submenu pl-4 space-y-1">
+                    <a href="patient_info.html#before-visit" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">Before Your Visit</a>
+                    <a href="patient_info.html#payment" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">Insurance & Payment</a>
+                    <a href="patient_info.html#faq" onclick="toggleMobileMenu()" class="block text-sm text-slate-600 py-1 hover:text-medical-primary">FAQs</a>
+                </div>
+            </div>
+
+            <a href="index.html#contact" onclick="toggleMobileMenu()" class="block text-slate-700 font-medium py-1" data-i18n="nav_contact">Contact</a>
+            
+            <div class="pt-2 flex flex-col space-y-2 border-t border-slate-200 mt-2">
+                <div class="grid grid-cols-3 gap-2 pb-2">
+                    <button onclick="setLanguage('en'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">English</button>
+                    <button onclick="setLanguage('am'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">አማርኛ</button>
+                    <button onclick="setLanguage('so'); toggleMobileMenu();" class="bg-slate-100 text-slate-700 text-xs py-2 rounded-lg font-bold text-center">Af-Somali</button>
+                </div>
+                <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full bg-medical-primary text-white font-semibold py-2.5 rounded-xl text-center shadow-md">
+                    <span data-i18n="book_btn">Book Appointment</span>
+                </button>
+            </div>
         </div>
-        <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full bg-medical-primary text-white font-semibold py-2.5 rounded-xl text-center shadow-md">
-            <span data-i18n="book_btn">Book Appointment</span>
-        </button>
-    </div>
-</div>
     </header>
 
     <section id="home" class="relative text-white py-16 sm:py-24 lg:py-36 overflow-hidden min-h-[580px] lg:min-h-[680px] flex items-center">
@@ -392,7 +507,7 @@
         </div>
     </section>
 
-    <!-- Stats Section (added) -->
+    <!-- Stats Section -->
     <section class="stats-section py-12 bg-white border-b border-slate-200 reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -786,7 +901,7 @@
         </div>
     </section>
 
-    <!-- Facility Showcase Section (Full-Width Edge-to-Edge Dark Navy/Black Section with Optimized Mobile Grid) -->
+    <!-- Facility Showcase Section -->
     <section id="gallery" class="w-full bg-slate-950 text-white py-16 sm:py-20 lg:py-28 reveal">
         <div class="max-w-[1440px] mx-auto px-3 sm:px-8 space-y-8 sm:space-y-12">
             <div class="text-center max-w-2xl mx-auto space-y-3">
@@ -1519,6 +1634,20 @@
             document.getElementById('mobile-menu').classList.add('hidden');
         }
 
+        // Mobile accordion submenu toggle
+        function toggleMobileSubmenu(btn) {
+            const parent = btn.closest('.mobile-accordion');
+            if (!parent) return;
+            const submenu = parent.querySelector('.mobile-submenu');
+            const chevron = btn.querySelector('.fa-chevron-down');
+            if (submenu) {
+                submenu.classList.toggle('open');
+                if (chevron) {
+                    chevron.style.transform = submenu.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+                }
+            }
+        }
+
         function openBookingModal() {
             document.getElementById('booking-modal').classList.remove('hidden');
         }
@@ -1833,10 +1962,7 @@
 
         // 6. INITIALIZE ALL EFFECTS
         document.addEventListener('DOMContentLoaded', function() {
-            // Add page transition class to body (already present)
-            // body already has .page-transition class
-            
-            // Init all effects
+            // Page transition is already on body
             initScrollReveal();
             initStatsCounter();
             initBackToTop();
