@@ -67,9 +67,157 @@
         .animate-fade-in {
             animation: fadeIn 0.3s ease-out forwards;
         }
+
+        /* ============ SCROLL REVEAL ANIMATIONS ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.85);
+            transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ============ TYPING TEXT CURSOR ============ */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: currentColor;
+            margin-left: 2px;
+            animation: cursorBlink 0.8s step-end infinite;
+        }
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* ============ BACK TO TOP BUTTON ============ */
+        #back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 999;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4);
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        #back-to-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(2, 132, 199, 0.5);
+        }
+
+        /* ============ FLOATING ACTION BUTTONS ============ */
+        .floating-actions {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 998;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .floating-actions a {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .floating-actions a:hover {
+            transform: scale(1.12) translateY(-3px);
+        }
+        .floating-actions .whatsapp {
+            background: #25D366;
+        }
+        .floating-actions .phone {
+            background: #0284c7;
+        }
+        .floating-actions .whatsapp:hover {
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+        .floating-actions .phone:hover {
+            box-shadow: 0 6px 25px rgba(2, 132, 199, 0.4);
+        }
+
+        /* ============ FADE PAGE TRANSITION ============ */
+        .page-transition {
+            animation: pageFadeIn 0.6s ease-out forwards;
+        }
+        @keyframes pageFadeIn {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============ STATS COUNTER ============ */
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0284c7;
+            display: inline-block;
+        }
+        .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+            margin-top: 4px;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden page-transition">
 
     <div class="bg-slate-900 text-slate-300 text-xs py-2.5 px-4 sm:px-8 border-b border-slate-800 relative z-20">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
@@ -177,18 +325,18 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10 w-full">
             <div class="max-w-3xl space-y-4 lg:space-y-6 text-center lg:text-left">
-                <div class="inline-flex items-center space-x-2 bg-slate-900/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700 text-xs font-semibold text-medical-200 shadow-sm">
+                <div class="inline-flex items-center space-x-2 bg-slate-900/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-700 text-xs font-semibold text-medical-200 shadow-sm reveal">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                     <span data-i18n="hero_badge">Jigjiga's Leading Private Healthcare Clinic</span>
                 </div>
-                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white">
-                    <span data-i18n="hero_title_1">MESH Medical And Surgical</span> <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-sky-300" data-i18n="hero_title_2">Speciality Clinic</span>
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white typing-effect" data-text="MESH Medical And Surgical Speciality Clinic">
+                    <!-- The typing effect will replace this content -->
                 </h1>
                 <!-- Hidden on mobile, visible on desktop -->
-                <p class="hidden md:block text-lg text-slate-200 max-w-2xl font-normal leading-relaxed drop-shadow" data-i18n="hero_desc">
+                <p class="hidden md:block text-lg text-slate-200 max-w-2xl font-normal leading-relaxed drop-shadow reveal" data-i18n="hero_desc">
                     Your Health Is Our Priority. With experienced specialists, modern diagnostic technology, and patient-centered treatment tailored for your family's well-being at Mesh Clinic in Jijiga.
                 </p>
-                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2 reveal">
                     <button onclick="openBookingModal()" class="w-full sm:w-auto bg-medical-primary hover:bg-medical-secondary text-white font-bold px-6 py-3.5 rounded-xl shadow-xl hover:scale-105 transition transform duration-200 flex items-center justify-center text-sm sm:text-base">
                         <i class="fa-solid fa-calendar-plus mr-2"></i> <span data-i18n="book_appointment_cta">Book An Appointment</span>
                     </button>
@@ -204,7 +352,7 @@
     </section>
 
     <!-- Welcome Section -->
-    <section class="w-full bg-slate-100/90 py-16 lg:py-24 border-b border-slate-200">
+    <section class="w-full bg-slate-100/90 py-16 lg:py-24 border-b border-slate-200 reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-8">
             <div class="bg-white rounded-3xl shadow-xl p-6 sm:p-12 border border-slate-100 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div class="lg:col-span-8 space-y-4">
@@ -244,8 +392,32 @@
         </div>
     </section>
 
+    <!-- Stats Section (added) -->
+    <section class="stats-section py-12 bg-white border-b border-slate-200 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="5000">0</span>
+                    <span class="stat-label">Happy Patients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="25">0</span>
+                    <span class="stat-label">Expert Doctors</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="15">0</span>
+                    <span class="stat-label">Years of Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="100">0</span>
+                    <span class="stat-label">% Patient Satisfaction</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Specialists Section -->
-    <section id="specialists" class="w-full bg-white py-16 lg:py-24 border-b border-slate-200">
+    <section id="specialists" class="w-full bg-white py-16 lg:py-24 border-b border-slate-200 reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-8">
             <div class="flex flex-col md:flex-row justify-between items-end mb-10">
                 <div class="space-y-3">
@@ -536,7 +708,7 @@
     </section>
 
     <!-- Departments Section -->
-    <section id="services" class="w-full bg-teal-50/50 py-16 lg:py-24 border-b border-slate-200">
+    <section id="services" class="w-full bg-teal-50/50 py-16 lg:py-24 border-b border-slate-200 reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
                 <span class="text-medical-primary font-bold uppercase tracking-widest text-xs bg-white px-3.5 py-1.5 rounded-full shadow-sm" data-i18n="clinical_services">Clinical Services</span>
@@ -545,7 +717,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Service 1 -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group reveal">
                     <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-heart-pulse"></i>
                     </div>
@@ -556,7 +728,7 @@
                     </button>
                 </div>
                 <!-- Service 2 -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group reveal">
                     <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-microscope"></i>
                     </div>
@@ -567,7 +739,7 @@
                     </button>
                 </div>
                 <!-- Service 3 -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group reveal">
                     <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-child-reaching"></i>
                     </div>
@@ -578,7 +750,7 @@
                     </button>
                 </div>
                 <!-- Service 4 (Pharmacy) -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group reveal">
                     <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-pills"></i>
                     </div>
@@ -589,7 +761,7 @@
                     </button>
                 </div>
                 <!-- Service 5 (ICU) -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group reveal">
                     <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-bed-pulse"></i>
                     </div>
@@ -600,7 +772,7 @@
                     </button>
                 </div>
                 <!-- Service 6 (Emergency) -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 group reveal">
                     <div class="w-14 h-14 rounded-2xl bg-medical-50 text-medical-primary flex items-center justify-center text-2xl mb-6 group-hover:bg-medical-primary group-hover:text-white transition shadow-sm">
                         <i class="fa-solid fa-truck-medical"></i>
                     </div>
@@ -615,7 +787,7 @@
     </section>
 
     <!-- Facility Showcase Section (Full-Width Edge-to-Edge Dark Navy/Black Section with Optimized Mobile Grid) -->
-    <section id="gallery" class="w-full bg-slate-950 text-white py-16 sm:py-20 lg:py-28">
+    <section id="gallery" class="w-full bg-slate-950 text-white py-16 sm:py-20 lg:py-28 reveal">
         <div class="max-w-[1440px] mx-auto px-3 sm:px-8 space-y-8 sm:space-y-12">
             <div class="text-center max-w-2xl mx-auto space-y-3">
                 <span class="text-medical-accent font-bold uppercase tracking-widest text-xs bg-medical-900/60 px-3.5 py-1.5 rounded-full border border-medical-500/30">Facility Showcase</span>
@@ -651,7 +823,7 @@
     </section>
 
     <!-- Expanded Patient Trust / Testimonial Video Section -->
-    <section class="w-full bg-slate-50 py-16 lg:py-24 border-b border-slate-200">
+    <section class="w-full bg-slate-50 py-16 lg:py-24 border-b border-slate-200 reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
                 <span class="text-medical-primary font-bold uppercase tracking-widest text-xs bg-white px-3.5 py-1.5 rounded-full shadow-sm" data-i18n="patient_trust">Patient Trust</span>
@@ -663,7 +835,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
                 <!-- Video Card 1 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group">
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group reveal">
                     <div class="relative overflow-hidden aspect-video bg-slate-900">
                         <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+1';" alt="Patient Testimonial 1 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
@@ -691,7 +863,7 @@
                 </div>
 
                 <!-- Video Card 2 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group">
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group reveal">
                     <div class="relative overflow-hidden aspect-video bg-slate-900">
                         <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+2';" alt="Patient Testimonial 2 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
@@ -719,7 +891,7 @@
                 </div>
 
                 <!-- Video Card 3 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group">
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group reveal">
                     <div class="relative overflow-hidden aspect-video bg-slate-900">
                         <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+3';" alt="Patient Testimonial 3 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
@@ -747,7 +919,7 @@
                 </div>
 
                 <!-- Video Card 4 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group">
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group reveal">
                     <div class="relative overflow-hidden aspect-video bg-slate-900">
                         <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+4';" alt="Patient Testimonial 4 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
@@ -775,7 +947,7 @@
                 </div>
 
                 <!-- Video Card 5 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group">
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group reveal">
                     <div class="relative overflow-hidden aspect-video bg-slate-900">
                         <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+5';" alt="Patient Testimonial 5 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
@@ -803,7 +975,7 @@
                 </div>
 
                 <!-- Video Card 6 -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group">
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-200 flex flex-col group reveal">
                     <div class="relative overflow-hidden aspect-video bg-slate-900">
                         <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0f172a/ffffff?text=Patient+Testimonial+6';" alt="Patient Testimonial 6 Thumbnail" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center">
@@ -835,7 +1007,7 @@
     </section>
 
     <!-- Our Story Section -->
-    <section id="story" class="w-full bg-slate-900 text-white py-16 lg:py-24 relative overflow-hidden">
+    <section id="story" class="w-full bg-slate-900 text-white py-16 lg:py-24 relative overflow-hidden reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div class="lg:col-span-6 space-y-6">
                 <span class="text-medical-accent font-bold uppercase tracking-widest text-xs bg-medical-900/50 px-3.5 py-1.5 rounded-full border border-medical-500/30" data-i18n="our_story_badge">Our Story</span>
@@ -871,7 +1043,7 @@
     </section>
 
     <!-- Footer Section -->
-    <footer id="contact" class="w-full bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-900">
+    <footer id="contact" class="w-full bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-900 reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
             <!-- Brand Column -->
             <div class="space-y-6 lg:col-span-1">
@@ -940,6 +1112,21 @@
             </div>
         </div>
     </footer>
+
+    <!-- ============ BACK TO TOP BUTTON ============ -->
+    <button id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- ============ FLOATING ACTION BUTTONS ============ -->
+    <div class="floating-actions" id="floating-actions">
+        <a href="https://wa.me/251915737157" target="_blank" class="whatsapp" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:0915737157" class="phone" aria-label="Call us">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+    </div>
 
     <div class="fixed bottom-6 right-6 z-50">
         <button onclick="toggleChat()" class="w-14 h-14 rounded-full bg-gradient-to-tr from-medical-primary to-medical-secondary text-white shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition transform duration-200 focus:outline-none">
@@ -1523,6 +1710,137 @@
                     renderer.setSize(window.innerWidth, window.innerHeight);
                 });
             }
+        });
+
+        // ============================================================
+        // NEW EFFECTS: TYPING, SCROLL REVEAL, STATS, BACK TO TOP, FLOATING ACTIONS
+        // ============================================================
+
+        // 1. TYPING TEXT EFFECT
+        function typeText(element, text, speed = 60) {
+            if (!element) return;
+            let i = 0;
+            element.textContent = '';
+            const cursor = document.createElement('span');
+            cursor.className = 'typing-cursor';
+            element.appendChild(cursor);
+            
+            function type() {
+                if (i < text.length) {
+                    const char = text.charAt(i);
+                    const textNode = document.createTextNode(char);
+                    element.insertBefore(textNode, cursor);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    cursor.style.display = 'none';
+                }
+            }
+            type();
+        }
+
+        // Apply typing effect to headings
+        document.addEventListener('DOMContentLoaded', function() {
+            const typingElements = document.querySelectorAll('.typing-effect');
+            typingElements.forEach(el => {
+                const text = el.getAttribute('data-text') || el.textContent.trim();
+                el.textContent = '';
+                typeText(el, text, 50);
+            });
+        });
+
+        // 2. SCROLL REVEAL ANIMATIONS
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+            
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            
+            reveals.forEach(el => revealObserver.observe(el));
+        }
+
+        // 3. STATS COUNTER
+        function initStatsCounter() {
+            const stats = document.querySelectorAll('.stat-number');
+            let statsAnimated = false;
+            
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !statsAnimated) {
+                        statsAnimated = true;
+                        stats.forEach(stat => {
+                            const target = parseInt(stat.getAttribute('data-target'));
+                            if (isNaN(target)) return;
+                            let current = 0;
+                            const increment = Math.ceil(target / 60);
+                            const timer = setInterval(() => {
+                                current += increment;
+                                if (current >= target) {
+                                    current = target;
+                                    clearInterval(timer);
+                                }
+                                stat.textContent = current + (target > 100 ? '+' : '');
+                            }, 30);
+                        });
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection) statsObserver.observe(statsSection);
+        }
+
+        // 4. BACK TO TOP BUTTON
+        function initBackToTop() {
+            const backBtn = document.getElementById('back-to-top');
+            if (!backBtn) return;
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    backBtn.classList.add('visible');
+                } else {
+                    backBtn.classList.remove('visible');
+                }
+            });
+            
+            backBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // 5. FLOATING ACTIONS (hide when scrolling down)
+        function initFloatingActions() {
+            const actions = document.getElementById('floating-actions');
+            if (!actions) return;
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    actions.style.opacity = '0.7';
+                    actions.style.transform = 'scale(0.95)';
+                } else {
+                    actions.style.opacity = '1';
+                    actions.style.transform = 'scale(1)';
+                }
+            });
+        }
+
+        // 6. INITIALIZE ALL EFFECTS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add page transition class to body (already present)
+            // body already has .page-transition class
+            
+            // Init all effects
+            initScrollReveal();
+            initStatsCounter();
+            initBackToTop();
+            initFloatingActions();
         });
     </script>
 </body>
